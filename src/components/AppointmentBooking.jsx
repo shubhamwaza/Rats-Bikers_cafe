@@ -6,21 +6,15 @@ import {
   Clock, 
   CheckCircle2, 
   ShieldCheck, 
-  DollarSign, 
   ChevronRight, 
-  Download, 
   Printer, 
-  AlertCircle,
   Wrench,
   Check,
-  User,
-  Phone,
-  Mail,
-  FileText
+  Gauge,
+  Droplet
 } from 'lucide-react';
 
 export default function AppointmentBooking() {
-  // Vehicle Types
   const bikeTypes = [
     { id: 'commuter', name: 'Commuter / Street', engine: '100 - 200cc', multiplier: 1.0, icon: '🛵' },
     { id: 'cruiser', name: 'Cruiser / Classic', engine: '250 - 650cc', multiplier: 1.15, icon: '🏍️' },
@@ -28,7 +22,6 @@ export default function AppointmentBooking() {
     { id: 'superbike', name: 'Superbike / Track', engine: '600 - 1000cc+', multiplier: 1.4, icon: '⚡' },
   ];
 
-  // Service Catalog
   const serviceCatalog = [
     { id: 'foam_wash', name: 'Hydro Foam Wash & Polish', category: 'Cleaning', price: 499, duration: 30, desc: 'High-pressure foam bath, wheel degreasing, and micro-fiber hand polish.' },
     { id: 'ceramic', name: 'Ceramic Pro Coating Shield', category: 'Detailing', price: 1999, duration: 90, desc: 'Hydrophobic nano-ceramic coat protecting paint & chrome from scratches.' },
@@ -48,7 +41,6 @@ export default function AppointmentBooking() {
     '06:30 PM - 08:00 PM'
   ];
 
-  // Form State
   const [selectedBikeType, setSelectedBikeType] = useState('cruiser');
   const [selectedServices, setSelectedServices] = useState(['foam_wash', 'chain_lube']);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -65,7 +57,6 @@ export default function AppointmentBooking() {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [bookingRef, setBookingRef] = useState('');
 
-  // Calculations
   const currentBike = bikeTypes.find(b => b.id === selectedBikeType);
   
   const calculateTotal = () => {
@@ -74,8 +65,7 @@ export default function AppointmentBooking() {
       return sum + (s ? s.price : 0);
     }, 0);
 
-    const vehicleScaledSum = Math.round(rawServicesSum * (currentBike ? currentBike.multiplier : 1));
-    return vehicleScaledSum;
+    return Math.round(rawServicesSum * (currentBike ? currentBike.multiplier : 1));
   };
 
   const calculateDuration = () => {
@@ -87,7 +77,7 @@ export default function AppointmentBooking() {
 
   const toggleService = (id) => {
     if (selectedServices.includes(id)) {
-      if (selectedServices.length === 1) return; // Keep at least one
+      if (selectedServices.length === 1) return;
       setSelectedServices(selectedServices.filter(s => s !== id));
     } else {
       setSelectedServices([...selectedServices, id]);
@@ -101,26 +91,23 @@ export default function AppointmentBooking() {
       return;
     }
 
-    const ref = 'RATS-SPA-' + Math.floor(100000 + Math.random() * 900000);
+    const ref = 'WO-' + Math.floor(100000 + Math.random() * 900000);
     setBookingRef(ref);
     setBookingConfirmed(true);
   };
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
       {/* Header */}
-      <div className="text-center space-y-4 mb-12">
-        <div className="inline-flex items-center gap-2 bg-[#FF5500]/10 border border-[#FF5500]/30 px-4 py-1.5 rounded-full text-xs font-bold text-[#FF5500] uppercase tracking-wider">
-          <Sparkles className="w-4 h-4" />
-          <span>Automotive Detailing Spa</span>
+      <div className="border-b-2 border-[#4A4C50] pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+        <div>
+          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">Garage Bay Booking & Diagnostics</h1>
+          <p className="text-[#FF5E00] font-mono mt-1 uppercase text-xs">// Work Order Estimator</p>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-          Online Bike Spa <span className="text-gradient-orange">Appointment & Cost Estimator</span>
-        </h1>
-        <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-          Select your bike type and service package below. Get a real-time instant price estimate before choosing your preferred date & time slot!
-        </p>
+        <div className="font-mono text-xs text-gray-400 bg-[#111111] p-2 border border-[#4A4C50]">
+          STATUS: BAY ACTIVE
+        </div>
       </div>
 
       {!bookingConfirmed ? (
@@ -130,39 +117,39 @@ export default function AppointmentBooking() {
           <div className="lg:col-span-7 space-y-8">
             
             {/* Step 1: Select Bike Category */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
-              <div className="flex items-center gap-2 text-white font-bold text-base">
-                <span className="w-7 h-7 rounded-full bg-[#FF5500] text-white flex items-center justify-center text-xs">1</span>
-                <span>Select Bike Category</span>
+            <div className="bg-[#111111] p-6 border-2 border-[#4A4C50] space-y-4">
+              <div className="flex items-center gap-2 text-white font-black text-lg uppercase tracking-wider">
+                <span className="bg-[#D92323] text-white px-2 py-0.5 text-xs font-mono font-bold">01</span>
+                <span>Select Vehicle Class</span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
                 {bikeTypes.map((type) => (
                   <button
                     key={type.id}
                     onClick={() => setSelectedBikeType(type.id)}
-                    className={`p-4 rounded-xl border text-left transition-all ${
+                    className={`p-4 border-2 text-left transition-all ${
                       selectedBikeType === type.id
-                        ? 'bg-[#FF5500]/15 border-[#FF5500] orange-glow-sm'
-                        : 'bg-slate-900/60 border-white/10 hover:border-white/30'
+                        ? 'bg-[#1A1A1A] border-[#FF5E00] text-white shadow-[0_0_10px_rgba(255,94,0,0.2)]'
+                        : 'bg-[#1A1A1A]/40 border-[#4A4C50] text-gray-400 hover:text-white'
                     }`}
                   >
                     <div className="text-2xl mb-1">{type.icon}</div>
-                    <div className="font-bold text-xs text-white">{type.name}</div>
-                    <div className="text-[10px] text-slate-400">{type.engine}</div>
+                    <div className="font-bold text-xs uppercase">{type.name}</div>
+                    <div className="text-[10px] text-[#4A4C50]">{type.engine}</div>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Step 2: Select Services */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
+            <div className="bg-[#111111] p-6 border-2 border-[#4A4C50] space-y-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-white font-bold text-base">
-                  <span className="w-7 h-7 rounded-full bg-[#FF5500] text-white flex items-center justify-center text-xs">2</span>
-                  <span>Select Spa Services Checklist</span>
+                <div className="flex items-center gap-2 text-white font-black text-lg uppercase tracking-wider">
+                  <span className="bg-[#D92323] text-white px-2 py-0.5 text-xs font-mono font-bold">02</span>
+                  <span>Select Garage Services</span>
                 </div>
-                <span className="text-xs text-[#FF5500] font-semibold">{selectedServices.length} selected</span>
+                <span className="font-mono text-xs text-[#FF5E00] font-bold">{selectedServices.length} SELECTED</span>
               </div>
 
               <div className="space-y-3">
@@ -173,37 +160,34 @@ export default function AppointmentBooking() {
                     <div
                       key={service.id}
                       onClick={() => toggleService(service.id)}
-                      className={`p-4 rounded-xl border cursor-pointer transition-all flex items-start justify-between gap-4 ${
+                      className={`p-4 border-2 cursor-pointer transition-all flex items-start justify-between gap-4 ${
                         isChecked 
-                          ? 'bg-slate-800/80 border-[#FF5500]/60' 
-                          : 'bg-slate-900/40 border-white/10 hover:border-white/20'
+                          ? 'bg-[#1A1A1A] border-[#FF5E00]' 
+                          : 'bg-[#1A1A1A]/40 border-[#4A4C50] hover:border-gray-400'
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`w-5 h-5 rounded mt-0.5 flex items-center justify-center transition-colors ${
-                          isChecked ? 'bg-[#FF5500] text-white' : 'border border-slate-600 bg-slate-900'
+                        <div className={`w-5 h-5 mt-0.5 flex items-center justify-center border transition-colors ${
+                          isChecked ? 'bg-[#FF5E00] border-[#FF5E00] text-black font-bold' : 'border-[#4A4C50] bg-[#1A1A1A]'
                         }`}>
-                          {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                          {isChecked && <Check className="w-4 h-4 stroke-[3]" />}
                         </div>
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-sm text-white">{service.name}</span>
-                            <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded uppercase font-semibold">
+                            <span className="font-bold text-sm text-white uppercase">{service.name}</span>
+                            <span className="font-mono text-[9px] bg-[#1A1A1A] text-[#8B5A2B] px-2 py-0.5 border border-[#4A4C50] uppercase">
                               {service.category}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-400 leading-snug">{service.desc}</p>
-                          <div className="text-[11px] text-slate-400 flex items-center gap-2 pt-1">
-                            <span className="flex items-center gap-1"><Clock className="w-3 h-3 text-[#FF5500]" /> ~{service.duration} mins</span>
+                          <p className="text-xs text-gray-400 leading-snug">{service.desc}</p>
+                          <div className="font-mono text-[11px] text-gray-400 flex items-center gap-2 pt-1">
+                            <span className="flex items-center gap-1 text-[#FF5E00]"><Clock className="w-3 h-3" /> ~{service.duration} MINS</span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="text-right shrink-0">
-                        <span className="font-extrabold text-sm text-white">₹{scaledPrice}</span>
-                        {currentBike.multiplier > 1.0 && (
-                          <div className="text-[9px] text-[#FF5500]">Tier Scaled</div>
-                        )}
+                      <div className="text-right shrink-0 font-mono">
+                        <span className="font-black text-sm text-white">₹{scaledPrice}</span>
                       </div>
                     </div>
                   );
@@ -211,31 +195,31 @@ export default function AppointmentBooking() {
               </div>
             </div>
 
-            {/* Step 3: Select Date & Time Slot */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
-              <div className="flex items-center gap-2 text-white font-bold text-base">
-                <span className="w-7 h-7 rounded-full bg-[#FF5500] text-white flex items-center justify-center text-xs">3</span>
-                <span>Select Appointment Date & Time Slot</span>
+            {/* Step 3: Date & Slot */}
+            <div className="bg-[#111111] p-6 border-2 border-[#4A4C50] space-y-4">
+              <div className="flex items-center gap-2 text-white font-black text-lg uppercase tracking-wider">
+                <span className="bg-[#D92323] text-white px-2 py-0.5 text-xs font-mono font-bold">03</span>
+                <span>Select Appointment Date & Time</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-2">Service Date</label>
+                  <label className="block font-bold text-gray-300 mb-2 uppercase">Service Date</label>
                   <input
                     type="date"
                     min={new Date().toISOString().split('T')[0]}
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-xs font-semibold focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border-2 border-[#4A4C50] px-4 py-3 text-white font-bold focus:outline-none focus:border-[#FF5E00]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-2">Available Time Slot</label>
+                  <label className="block font-bold text-gray-300 mb-2 uppercase">Available Slot</label>
                   <select
                     value={selectedSlot}
                     onChange={(e) => setSelectedSlot(e.target.value)}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-xs font-semibold focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border-2 border-[#4A4C50] px-4 py-3 text-white font-bold focus:outline-none focus:border-[#FF5E00]"
                   >
                     {timeSlots.map((slot, idx) => (
                       <option key={idx} value={slot}>{slot}</option>
@@ -248,116 +232,88 @@ export default function AppointmentBooking() {
           </div>
 
 
-          {/* RIGHT COLUMN: Live Estimate Summary & Rider Form */}
-          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
+          {/* RIGHT COLUMN: Diagnostic Work Order Summary */}
+          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28 font-mono">
             
-            {/* Live Cost Calculation Card */}
-            <div className="glass-panel-glow p-6 rounded-2xl space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Wrench className="w-5 h-5 text-[#FF5500]" />
-                  <h3 className="font-bold text-white text-base">Live Service Estimate</h3>
-                </div>
-                <span className="text-xs bg-[#FF5500]/20 text-[#FF5500] px-2.5 py-1 rounded-full font-bold">
-                  Instant Calculator
-                </span>
+            <div className="bg-[#111111] p-6 border-2 border-[#D92323] border-l-6 space-y-6">
+              
+              {/* Header */}
+              <div className="border-b border-[#4A4C50] pb-3 flex justify-between items-center">
+                <div className="text-[#D92323] font-bold text-xs uppercase">{">>"} WORK ORDER ESTIMATE</div>
+                <span className="text-[10px] bg-[#D92323] text-white px-2 py-0.5 font-bold">GARAGE OS</span>
               </div>
 
-              {/* Selected Services List */}
-              <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+              {/* Selected List */}
+              <div className="space-y-2 text-xs border-b border-[#4A4C50] pb-4 max-h-40 overflow-y-auto">
                 {selectedServices.map(id => {
                   const s = serviceCatalog.find(item => item.id === id);
                   if (!s) return null;
                   const price = Math.round(s.price * currentBike.multiplier);
                   return (
-                    <div key={id} className="flex justify-between text-xs py-1 border-b border-white/5">
-                      <span className="text-slate-300">{s.name}</span>
-                      <span className="font-semibold text-white">₹{price}</span>
+                    <div key={id} className="flex justify-between text-gray-300">
+                      <span>{s.name}</span>
+                      <span className="font-bold text-white">₹{price}</span>
                     </div>
                   );
                 })}
               </div>
 
-              {/* Summary Totals */}
-              <div className="space-y-2 pt-2 border-t border-white/10">
-                <div className="flex justify-between text-xs text-slate-400">
-                  <span>Bike Class ({currentBike.name}):</span>
-                  <span>{currentBike.multiplier > 1 ? `+${Math.round((currentBike.multiplier - 1) * 100)}% Rate` : 'Standard Rate'}</span>
+              {/* Work Order Breakdown */}
+              <div className="space-y-2 text-xs">
+                <div className="flex justify-between text-gray-400">
+                  <span>CLASS MULTIPLIER:</span>
+                  <span className="text-white font-bold">{currentBike.name} ({currentBike.multiplier}x)</span>
                 </div>
-                <div className="flex justify-between text-xs text-slate-400">
-                  <span>Estimated Time Required:</span>
-                  <span className="text-[#FF5500] font-semibold">~{calculateDuration()} Mins</span>
+                <div className="flex justify-between text-gray-400">
+                  <span>LABOR TIME:</span>
+                  <span className="text-[#FF5E00] font-bold">~{calculateDuration()} MINS</span>
                 </div>
-                <div className="flex justify-between items-center pt-3 border-t border-white/10">
-                  <span className="text-sm font-extrabold text-white">Total Estimated Cost:</span>
-                  <span className="text-2xl font-black text-[#FF5500]">₹{calculateTotal()}</span>
+                <div className="flex justify-between items-center pt-3 border-t border-[#4A4C50]">
+                  <span className="font-bold text-white uppercase text-sm">TOTAL ESTIMATED:</span>
+                  <span className="text-3xl font-black text-[#D92323]">₹{calculateTotal()}</span>
                 </div>
               </div>
 
-              {/* Rider Details Form */}
-              <form onSubmit={handleBookingSubmit} className="space-y-3 pt-4 border-t border-white/10">
-                <h4 className="font-bold text-xs text-slate-200 uppercase tracking-wider">Rider Contact Information</h4>
+              {/* Rider Form */}
+              <form onSubmit={handleBookingSubmit} className="space-y-3 pt-4 border-t border-[#4A4C50]">
+                <div className="text-xs font-bold text-[#8B5A2B] uppercase">// RIDER CONTACT INFO</div>
                 
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Full Name *"
-                    required
-                    value={riderInfo.fullName}
-                    onChange={(e) => setRiderInfo({...riderInfo, fullName: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5500]"
-                  />
-                </div>
+                <input
+                  type="text"
+                  placeholder="FULL NAME *"
+                  required
+                  value={riderInfo.fullName}
+                  onChange={(e) => setRiderInfo({...riderInfo, fullName: e.target.value})}
+                  className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
+                />
 
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     type="tel"
-                    placeholder="Phone Number *"
+                    placeholder="PHONE *"
                     required
                     value={riderInfo.phone}
                     onChange={(e) => setRiderInfo({...riderInfo, phone: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
                   />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    value={riderInfo.email}
-                    onChange={(e) => setRiderInfo({...riderInfo, email: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5500]"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
                   <input
                     type="text"
-                    placeholder="Bike Make & Model * (e.g. RE Himalayan)"
+                    placeholder="BIKE MODEL *"
                     required
                     value={riderInfo.bikeModel}
                     onChange={(e) => setRiderInfo({...riderInfo, bikeModel: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5500]"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Reg No (e.g. KA-03-HM-1234)"
-                    value={riderInfo.regNumber}
-                    onChange={(e) => setRiderInfo({...riderInfo, regNumber: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#FF5500] to-[#FF7700] hover:from-[#E04B00] hover:to-[#FF5500] text-white font-extrabold text-sm py-4 rounded-xl shadow-xl orange-glow transition-all flex items-center justify-center gap-2 mt-4"
+                  className="btn-red w-full py-4 text-xs font-black flex items-center justify-center gap-2 mt-4"
                 >
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>Confirm Spa Appointment Slot</span>
+                  <Gauge className="w-5 h-5" />
+                  <span>SCHEDULE SERVICE BAY</span>
                 </button>
               </form>
-
-              <div className="flex items-center gap-2 text-[11px] text-slate-400 justify-center pt-1">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Pay at cafe after service completion • Free cancellation</span>
-              </div>
 
             </div>
 
@@ -365,77 +321,60 @@ export default function AppointmentBooking() {
 
         </div>
       ) : (
-        /* CONFIRMATION PASS SCREEN */
-        <div className="max-w-2xl mx-auto glass-panel-glow p-8 rounded-3xl space-y-6 text-center animate-fade-in">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+        /* CONFIRMATION WORK ORDER PASS */
+        <div className="max-w-2xl mx-auto bg-[#111111] border-2 border-[#D92323] border-l-8 p-8 space-y-6 text-center animate-fade-in font-mono">
+          <div className="w-16 h-16 bg-[#D92323] text-white flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-10 h-10" />
           </div>
 
-          <div className="space-y-2">
-            <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Appointment Confirmed!</span>
-            <h2 className="text-3xl font-extrabold text-white">R.A.T.S Bike Spa Slot Reserved</h2>
-            <p className="text-xs text-slate-300">
-              We have reserved your slot at the R.A.T.S Clubhouse Spa Bay. Please bring your motorcycle 10 mins before your slot time.
-            </p>
+          <div className="space-y-1">
+            <span className="text-xs font-bold text-[#FF5E00] uppercase">// WORK ORDER CREATED</span>
+            <h2 className="text-3xl font-black text-white uppercase">SERVICE BAY RESERVED</h2>
           </div>
 
-          {/* Booking Pass Details Card */}
-          <div className="bg-slate-900/90 border border-white/10 rounded-2xl p-6 text-left space-y-4">
-            <div className="flex justify-between items-center pb-3 border-b border-white/10">
+          <div className="bg-[#1A1A1A] border border-[#4A4C50] p-6 text-left space-y-4">
+            <div className="flex justify-between items-center pb-3 border-b border-[#4A4C50]">
               <div>
-                <p className="text-[10px] text-slate-400 uppercase">Booking Reference</p>
-                <p className="font-mono font-bold text-base text-[#FF5500]">{bookingRef}</p>
+                <p className="text-[10px] text-gray-400">WORK ORDER ID</p>
+                <p className="font-bold text-lg text-[#D92323]">{bookingRef}</p>
               </div>
-              <span className="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full font-bold">
+              <span className="bg-[#D92323] text-white text-xs px-3 py-1 font-bold">
                 CONFIRMED
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs">
               <div>
-                <p className="text-slate-400">Rider Name:</p>
+                <p className="text-gray-400">RIDER:</p>
                 <p className="font-bold text-white">{riderInfo.fullName}</p>
               </div>
               <div>
-                <p className="text-slate-400">Bike Model:</p>
-                <p className="font-bold text-white">{riderInfo.bikeModel} ({currentBike.name})</p>
+                <p className="text-gray-400">VEHICLE:</p>
+                <p className="font-bold text-white">{riderInfo.bikeModel}</p>
               </div>
               <div>
-                <p className="text-slate-400">Slot Date & Time:</p>
+                <p className="text-gray-400">SLOT:</p>
                 <p className="font-bold text-white">{selectedDate} @ {selectedSlot}</p>
               </div>
               <div>
-                <p className="text-slate-400">Estimated Total Cost:</p>
-                <p className="font-black text-lg text-[#FF5500]">₹{calculateTotal()}</p>
+                <p className="text-gray-400">TOTAL COST:</p>
+                <p className="font-black text-lg text-[#D92323]">₹{calculateTotal()}</p>
               </div>
-            </div>
-
-            <div className="pt-2 border-t border-white/10 text-xs text-slate-400">
-              <p className="font-semibold text-slate-300 mb-1">Selected Services:</p>
-              <ul className="list-disc list-inside space-y-0.5">
-                {selectedServices.map(id => {
-                  const s = serviceCatalog.find(item => item.id === id);
-                  return s ? <li key={id}>{s.name}</li> : null;
-                })}
-              </ul>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex gap-3">
             <button
               onClick={() => window.print()}
-              className="flex-1 bg-slate-900 border border-white/20 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2"
+              className="btn-secondary flex-1 py-3 text-xs flex items-center justify-center gap-2"
             >
-              <Printer className="w-4 h-4" /> Print Booking Receipt
+              <Printer className="w-4 h-4" /> Print Work Order
             </button>
             <button
-              onClick={() => {
-                setBookingConfirmed(false);
-                setSelectedServices(['foam_wash']);
-              }}
-              className="flex-1 bg-[#FF5500] hover:bg-[#E04B00] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2"
+              onClick={() => setBookingConfirmed(false)}
+              className="btn-red flex-1 py-3 text-xs"
             >
-              Book Another Appointment
+              Book Another Bay
             </button>
           </div>
 

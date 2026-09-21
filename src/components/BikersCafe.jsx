@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { 
   Coffee, 
   Flame, 
-  Utensils, 
   Plus, 
-  Check, 
   ShoppingBag, 
   Sparkles, 
   Clock, 
-  ChevronRight,
-  Heart
+  ChevronRight
 } from 'lucide-react';
 
 export default function BikersCafe() {
@@ -30,7 +27,7 @@ export default function BikersCafe() {
       name: 'R.A.T.S Double Shot Nitro Cold Brew',
       category: 'coffee',
       price: 180,
-      badge: 'Bestseller',
+      badge: 'High Rev',
       desc: 'Infused with nitrogen for a velvety smooth texture and rich caffeine surge before long highway rides.',
       image: '☕'
     },
@@ -63,11 +60,11 @@ export default function BikersCafe() {
     },
     {
       id: 5,
-      name: 'Twin-Cylinder Smoked Bacon Burger',
+      name: 'The Spark Plug Smash Burger',
       category: 'mains',
       price: 360,
       badge: 'Chef Special',
-      desc: 'Double smashed tender beef/chicken patty, crispy bacon, aged cheddar, caramelised onions, and house sauce.',
+      desc: 'Double smash patty, pepper jack, jalapeños, and our signature balsamic motor-oil glaze.',
       image: '🍔'
     },
     {
@@ -113,36 +110,32 @@ export default function BikersCafe() {
     <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
       {/* Header Banner */}
-      <div className="relative rounded-3xl overflow-hidden p-8 sm:p-12 border border-white/10 bg-gradient-to-r from-[#141620] to-[#0A0B0E]">
-        <div className="absolute top-0 right-0 w-full h-full opacity-30">
-          <img src="/bikers-cafe.jpg" alt="RATS Bikers Cafe" className="w-full h-full object-cover" />
-        </div>
+      <div className="bg-[#111111] border-2 border-[#4A4C50] border-l-8 border-l-[#FF5E00] p-8 sm:p-12 relative overflow-hidden">
         <div className="relative z-10 space-y-4 max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-[#FF5500]/20 border border-[#FF5500]/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-[#FF5500] uppercase">
-            <Coffee className="w-4 h-4" /> Clubhouse Gastronomy
+          <div className="inline-block bg-[#FF5E00] text-black font-mono px-3 py-1 text-xs font-bold uppercase">
+            // CLUBHOUSE GASTRONOMY
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white uppercase">
-            R.A.T.S <span className="text-gradient-orange">Bikers Cafe</span>
+          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
+            R.A.T.S BIKERS CAFE
           </h1>
-          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            Where coffee purists meets highway legends. Enjoy specialty single-origin brews, high-protein rider bowls, and gourmet comfort food in our air-conditioned member lounge.
+          <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+            Where coffee purists meet highway legends. Enjoy specialty single-origin brews, high-protein rider bowls, and gourmet comfort food in our air-conditioned member lounge.
           </p>
         </div>
       </div>
 
-      {/* Category Pills & Order Summary Header */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* Category Pills & Order Summary */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 font-mono">
         
-        {/* Category Filter */}
         <div className="flex flex-wrap items-center gap-2">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
+              className={`px-4 py-2 text-xs font-bold uppercase transition-all ${
                 activeCategory === cat.id
-                  ? 'bg-[#FF5500] text-white orange-glow-sm'
-                  : 'bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:border-white/30'
+                  ? 'bg-[#FF5E00] text-black border-2 border-[#FF5E00]'
+                  : 'bg-[#111111] border-2 border-[#4A4C50] text-gray-300 hover:border-white'
               }`}
             >
               {cat.name}
@@ -150,17 +143,16 @@ export default function BikersCafe() {
           ))}
         </div>
 
-        {/* Live Cart Counter */}
         {cart.length > 0 && (
-          <div className="flex items-center gap-3 bg-slate-900/90 border border-[#FF5500]/50 px-4 py-2 rounded-2xl">
-            <ShoppingBag className="w-4 h-4 text-[#FF5500]" />
-            <span className="text-xs text-slate-300 font-semibold">{cart.length} Items Selected</span>
-            <span className="font-extrabold text-white text-sm">₹{cartTotal}</span>
+          <div className="flex items-center gap-3 bg-[#111111] border-2 border-[#D92323] px-4 py-2">
+            <ShoppingBag className="w-4 h-4 text-[#D92323]" />
+            <span className="text-xs text-gray-300 font-bold">{cart.length} ITEMS</span>
+            <span className="font-black text-white text-sm">₹{cartTotal}</span>
             <button
               onClick={() => alert(`Pre-order placed for ₹${cartTotal}! Please notify your barista on arrival.`)}
-              className="bg-[#FF5500] hover:bg-[#E04B00] text-white text-[11px] font-extrabold px-3 py-1 rounded-lg"
+              className="btn-red text-[11px] px-3 py-1"
             >
-              Pre-Order
+              PRE-ORDER
             </button>
           </div>
         )}
@@ -172,32 +164,32 @@ export default function BikersCafe() {
         {filteredItems.map((item) => (
           <div
             key={item.id}
-            className="glass-panel p-5 rounded-2xl border border-white/10 hover:border-[#FF5500]/50 transition-all duration-300 flex flex-col justify-between group"
+            className="bg-[#111111] border-2 border-[#4A4C50] hover:border-[#FF5E00] p-5 flex flex-col justify-between group transition-colors"
           >
             <div className="space-y-3">
               <div className="flex justify-between items-start">
                 <span className="text-3xl">{item.image}</span>
-                <span className="bg-[#FF5500]/15 text-[#FF5500] border border-[#FF5500]/30 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                <span className="bg-[#1A1A1A] border border-[#4A4C50] text-[#D92323] font-mono text-[9px] font-bold px-2 py-0.5 uppercase">
                   {item.badge}
                 </span>
               </div>
 
               <div>
-                <h3 className="font-bold text-white text-sm group-hover:text-[#FF5500] transition-colors">
+                <h3 className="font-black text-white text-base group-hover:text-[#FF5E00] transition-colors uppercase">
                   {item.name}
                 </h3>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-gray-400 mt-1 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/10 mt-4 flex items-center justify-between">
-              <span className="font-extrabold text-base text-white">₹{item.price}</span>
+            <div className="pt-4 border-t border-[#4A4C50] mt-4 flex items-center justify-between font-mono">
+              <span className="font-black text-base text-white">₹{item.price}</span>
               <button
                 onClick={() => addToCart(item)}
-                className="bg-slate-900 hover:bg-[#FF5500] text-slate-200 hover:text-white border border-white/10 p-2 rounded-xl transition-all"
-                title="Add to Cafe Order"
+                className="bg-[#1A1A1A] hover:bg-[#D92323] text-white border border-[#4A4C50] p-2 transition-all"
+                title="Add to Order"
               >
                 <Plus className="w-4 h-4" />
               </button>

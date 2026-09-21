@@ -8,17 +8,14 @@ import {
   Lock, 
   CheckCircle2, 
   Award, 
-  Download, 
   Printer, 
-  Tag, 
   Bike,
-  Sparkles,
   ArrowRight
 } from 'lucide-react';
 
 export default function PaymentModal({ tier, billingCycle, onClose }) {
-  const [step, setStep] = useState(1); // 1: Info & Method, 2: OTP/Auth, 3: Success VIP Card
-  const [paymentMethod, setPaymentMethod] = useState('upi'); // 'upi', 'card', 'netbanking'
+  const [step, setStep] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState('upi');
   const [couponCode, setCouponCode] = useState('');
   const [discountApplied, setDiscountApplied] = useState(false);
   
@@ -70,13 +67,13 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="bg-[#10121A] border border-white/10 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in font-mono">
+      <div className="bg-[#111111] border-2 border-[#D92323] w-full max-w-2xl overflow-hidden shadow-2xl relative">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors z-10"
+          className="absolute top-4 right-4 p-2 bg-[#1A1A1A] border border-[#4A4C50] text-gray-400 hover:text-white"
         >
           <X className="w-5 h-5" />
         </button>
@@ -85,175 +82,122 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
         {step === 1 && (
           <div className="p-6 sm:p-8 space-y-6">
             
-            {/* Header */}
-            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#FFB800] text-black flex items-center justify-center font-bold">
+            <div className="flex items-center gap-3 border-b-2 border-[#4A4C50] pb-4">
+              <div className="w-10 h-10 bg-[#D92323] text-white flex items-center justify-center font-bold">
                 <Award className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-extrabold text-white text-lg">Priority VIP Membership Checkout</h3>
-                <p className="text-xs text-slate-400">Selected Tier: <span className="text-[#FFB800] font-bold">{tier.name}</span> ({billingCycle})</p>
+                <h3 className="font-black text-white text-xl uppercase font-sans tracking-tight">Priority VIP Club Checkout</h3>
+                <p className="text-xs text-[#8B5A2B]">Tier: {tier.name} ({billingCycle.toUpperCase()})</p>
               </div>
             </div>
 
-            {/* Rider Info Form */}
             <form onSubmit={handleProceedToAuth} className="space-y-4">
               <div className="space-y-2">
-                <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">1. Rider Details</h4>
+                <div className="text-xs font-bold text-[#FF5E00] uppercase">// 1. RIDER DETAILS</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="text"
-                    placeholder="Full Name *"
+                    placeholder="FULL NAME *"
                     required
                     value={riderDetails.fullName}
                     onChange={(e) => setRiderDetails({...riderDetails, fullName: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
                   />
                   <input
                     type="tel"
-                    placeholder="Phone Number *"
+                    placeholder="PHONE NUMBER *"
                     required
                     value={riderDetails.phone}
                     onChange={(e) => setRiderDetails({...riderDetails, phone: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="email"
-                    placeholder="Email Address"
+                    placeholder="EMAIL ADDRESS"
                     value={riderDetails.email}
                     onChange={(e) => setRiderDetails({...riderDetails, email: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
                   />
                   <input
                     type="text"
-                    placeholder="Motorcycle Model * (e.g. Triumph Tiger 900)"
+                    placeholder="MOTORCYCLE MODEL *"
                     required
                     value={riderDetails.bikeModel}
                     onChange={(e) => setRiderDetails({...riderDetails, bikeModel: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
                   />
                 </div>
               </div>
 
-              {/* Payment Method Choice */}
+              {/* Payment Method */}
               <div className="space-y-2 pt-2">
-                <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">2. Payment Method</h4>
+                <div className="text-xs font-bold text-[#FF5E00] uppercase">// 2. PAYMENT METHOD</div>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('upi')}
-                    className={`p-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
-                      paymentMethod === 'upi' ? 'bg-[#FF5500]/20 border-[#FF5500] text-white' : 'bg-slate-900 border-white/10 text-slate-400'
+                    className={`p-3 border text-xs font-bold flex items-center justify-center gap-2 uppercase transition-all ${
+                      paymentMethod === 'upi' ? 'bg-[#D92323] text-white border-[#D92323]' : 'bg-[#1A1A1A] border-[#4A4C50] text-gray-400'
                     }`}
                   >
-                    <QrCode className="w-4 h-4 text-[#FF5500]" /> UPI / QR
+                    <QrCode className="w-4 h-4" /> UPI / QR
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
-                    className={`p-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
-                      paymentMethod === 'card' ? 'bg-[#FF5500]/20 border-[#FF5500] text-white' : 'bg-slate-900 border-white/10 text-slate-400'
+                    className={`p-3 border text-xs font-bold flex items-center justify-center gap-2 uppercase transition-all ${
+                      paymentMethod === 'card' ? 'bg-[#D92323] text-white border-[#D92323]' : 'bg-[#1A1A1A] border-[#4A4C50] text-gray-400'
                     }`}
                   >
-                    <CreditCard className="w-4 h-4 text-[#FF5500]" /> Card
+                    <CreditCard className="w-4 h-4" /> Card
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('netbanking')}
-                    className={`p-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
-                      paymentMethod === 'netbanking' ? 'bg-[#FF5500]/20 border-[#FF5500] text-white' : 'bg-slate-900 border-white/10 text-slate-400'
+                    className={`p-3 border text-xs font-bold flex items-center justify-center gap-2 uppercase transition-all ${
+                      paymentMethod === 'netbanking' ? 'bg-[#D92323] text-white border-[#D92323]' : 'bg-[#1A1A1A] border-[#4A4C50] text-gray-400'
                     }`}
                   >
-                    <Building2 className="w-4 h-4 text-[#FF5500]" /> NetBanking
+                    <Building2 className="w-4 h-4" /> NetBank
                   </button>
                 </div>
-
-                {/* Sub-inputs */}
-                {paymentMethod === 'upi' && (
-                  <div className="p-4 bg-slate-900/90 rounded-xl border border-white/10 space-y-3">
-                    <p className="text-xs text-slate-300">Scan QR Code using GPay, PhonePe, or Paytm:</p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-24 h-24 bg-white p-2 rounded-xl flex items-center justify-center shrink-0">
-                        <QrCode className="w-20 h-20 text-black" />
-                      </div>
-                      <div className="space-y-1 text-xs">
-                        <p className="text-slate-400">Or enter VPA / UPI ID:</p>
-                        <input
-                          type="text"
-                          placeholder="username@upi"
-                          value={upiId}
-                          onChange={(e) => setUpiId(e.target.value)}
-                          className="bg-slate-800 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white w-full focus:outline-none focus:border-[#FF5500]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {paymentMethod === 'card' && (
-                  <div className="p-4 bg-slate-900/90 rounded-xl border border-white/10 space-y-3">
-                    <input
-                      type="text"
-                      placeholder="Card Number (4532 •••• •••• ••••)"
-                      value={cardInfo.number}
-                      onChange={(e) => setCardInfo({...cardInfo, number: e.target.value})}
-                      className="w-full bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white"
-                    />
-                    <div className="grid grid-cols-2 gap-2">
-                      <input
-                        type="text"
-                        placeholder="MM / YY"
-                        value={cardInfo.expiry}
-                        onChange={(e) => setCardInfo({...cardInfo, expiry: e.target.value})}
-                        className="bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white"
-                      />
-                      <input
-                        type="password"
-                        placeholder="CVV"
-                        maxLength={4}
-                        value={cardInfo.cvv}
-                        onChange={(e) => setCardInfo({...cardInfo, cvv: e.target.value})}
-                        className="bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white"
-                      />
-                    </div>
-                  </div>
-                )}
               </div>
 
-              {/* Coupon Code */}
+              {/* Coupon */}
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="Coupon Code (Try RATS2026)"
+                  placeholder="COUPON (TRY RATS2026)"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
-                  className="flex-1 bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF5500]"
+                  className="flex-1 bg-[#1A1A1A] border border-[#4A4C50] px-4 py-2.5 text-xs text-white uppercase focus:outline-none focus:border-[#FF5E00]"
                 />
                 <button
                   type="button"
                   onClick={handleApplyCoupon}
-                  className="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/10"
+                  className="btn-secondary px-4 py-2.5 text-xs"
                 >
-                  Apply
+                  APPLY
                 </button>
               </div>
 
-              {/* Order Total & CTA */}
-              <div className="border-t border-white/10 pt-4 flex items-center justify-between">
+              {/* Total & CTA */}
+              <div className="border-t border-[#4A4C50] pt-4 flex items-center justify-between">
                 <div>
-                  <p className="text-[10px] text-slate-400">Total Payable:</p>
-                  <p className="text-xl font-black text-[#FFB800]">
-                    ₹{finalPrice} {discountApplied && <span className="text-xs text-emerald-400 font-semibold">(10% Off Applied)</span>}
+                  <p className="text-[10px] text-gray-400">TOTAL PAYABLE:</p>
+                  <p className="text-xl font-black text-[#D92323]">
+                    ₹{finalPrice} {discountApplied && <span className="text-xs text-[#FF5E00]">(10% OFF)</span>}
                   </p>
                 </div>
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-[#FFB800] to-[#FF8800] text-black font-extrabold text-xs px-6 py-3.5 rounded-xl flex items-center gap-2 shadow-lg"
+                  className="btn-red px-6 py-3.5 text-xs flex items-center gap-2"
                 >
-                  <span>Proceed to Payment</span>
+                  <span>PAY NOW</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -263,102 +207,104 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
           </div>
         )}
 
-        {/* STEP 2: SIMULATED PAYMENT OTP AUTHORIZATION */}
+        {/* STEP 2: SIMULATED OTP */}
         {step === 2 && (
           <div className="p-8 space-y-6 text-center">
-            <div className="w-16 h-16 rounded-full bg-[#FF5500]/20 text-[#FF5500] flex items-center justify-center mx-auto animate-pulse">
+            <div className="w-16 h-16 bg-[#D92323] text-white flex items-center justify-center mx-auto">
               <Lock className="w-8 h-8" />
             </div>
 
-            <div className="space-y-2">
-              <h3 className="text-2xl font-extrabold text-white">Bank Authorization OTP</h3>
-              <p className="text-xs text-slate-400">
-                A simulated verification code has been sent to your registered mobile number for <span className="text-white font-bold">₹{finalPrice}</span>.
+            <div className="space-y-2 font-sans">
+              <h3 className="text-2xl font-black text-white uppercase">BANK AUTHORIZATION OTP</h3>
+              <p className="text-xs text-gray-400">
+                A simulated verification code has been sent for <span className="text-white font-bold">₹{finalPrice}</span>.
               </p>
             </div>
 
             <div className="max-w-xs mx-auto space-y-3">
               <input
                 type="text"
-                placeholder="Enter 4-digit OTP (e.g. 1234)"
+                placeholder="ENTER 4-DIGIT OTP"
                 maxLength={4}
                 value={otpInput}
                 onChange={(e) => setOtpInput(e.target.value)}
-                className="w-full bg-slate-900 border border-[#FF5500]/50 rounded-xl px-4 py-3 text-center text-lg font-mono font-bold tracking-widest text-white focus:outline-none focus:border-[#FF5500]"
+                className="w-full bg-[#1A1A1A] border-2 border-[#D92323] px-4 py-3 text-center text-xl font-bold tracking-widest text-white focus:outline-none"
               />
-              <p className="text-[10px] text-slate-400">Enter any 4-digit code to complete test checkout</p>
             </div>
 
             <div className="flex gap-3 justify-center pt-4">
               <button
                 onClick={() => setStep(1)}
-                className="bg-slate-900 border border-white/10 text-slate-400 text-xs font-bold px-6 py-3 rounded-xl"
+                className="btn-secondary px-6 py-3 text-xs"
               >
                 Back
               </button>
               <button
                 onClick={handleSimulatePayment}
                 disabled={isProcessing}
-                className="bg-[#FF5500] hover:bg-[#E04B00] text-white font-extrabold text-xs px-8 py-3 rounded-xl orange-glow flex items-center gap-2"
+                className="btn-red px-8 py-3 text-xs flex items-center gap-2"
               >
-                {isProcessing ? 'Authorizing...' : 'Authorize & Issue VIP Pass'}
+                {isProcessing ? 'AUTHORIZING...' : 'AUTHORIZE & ISSUE VIP PASS'}
               </button>
             </div>
           </div>
         )}
 
-        {/* STEP 3: DIGITAL VIP MEMBERSHIP CARD RENDER */}
+        {/* STEP 3: METALLIC DIGITAL VIP PASS CARD WITH OFFICIAL R.A.T.S TIRE EMBLEM */}
         {step === 3 && (
           <div className="p-8 space-y-6 animate-fade-in text-center">
             
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 px-4 py-1.5 rounded-full text-xs font-bold">
-              <CheckCircle2 className="w-4 h-4" /> Payment Successful & Membership Active!
+            <div className="inline-block bg-[#FF5E00] text-black px-4 py-1 font-bold text-xs uppercase">
+              ✓ MEMBERSHIP ACTIVE & VERIFIED
             </div>
 
-            {/* DIGITAL VIP CARD MOCKUP */}
-            <div className="max-w-md mx-auto relative rounded-3xl p-6 bg-gradient-to-br from-[#1E2230] via-[#0F111A] to-[#08090E] border border-[#FFB800]/50 shadow-2xl text-left space-y-6 orange-glow-sm overflow-hidden">
+            {/* DIGITAL VIP CARD MOCKUP WITH OFFICIAL EMBLEM */}
+            <div className="max-w-md mx-auto rounded-none p-6 bg-[#1A1A1A] border-2 border-[#D92323] border-l-8 text-left space-y-6 shadow-2xl relative">
               
-              {/* Card Hologram Glow */}
-              <div className="absolute -top-12 -right-12 w-40 h-40 bg-[#FFB800]/20 rounded-full blur-2xl pointer-events-none"></div>
-
-              {/* Card Header */}
-              <div className="flex justify-between items-start">
-                <div className="flex items-center gap-2">
-                  <Bike className="w-6 h-6 text-[#FFB800]" />
+              {/* Card Header with Official Emblem */}
+              <div className="flex justify-between items-start pb-4 border-b border-[#4A4C50]">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-white p-1 border-2 border-[#4A4C50] shrink-0">
+                    <img 
+                      src="/rats-logo.png" 
+                      alt="R.A.T.S Tire Emblem Logo" 
+                      className="w-full h-full object-contain rounded-full"
+                    />
+                  </div>
                   <div>
-                    <h4 className="font-extrabold text-white text-sm tracking-wider">R.A.T.S CLUBHOUSE</h4>
-                    <p className="text-[9px] text-[#FFB800] uppercase font-bold tracking-widest">{tier.name}</p>
+                    <h4 className="font-display text-xl text-white tracking-widest leading-none">R.A.T.S CLUBHOUSE</h4>
+                    <p className="text-[10px] text-[#FF5E00] uppercase font-bold">{tier.name}</p>
                   </div>
                 </div>
-                <Award className="w-8 h-8 text-[#FFB800]" />
+                <Award className="w-8 h-8 text-[#D92323]" />
               </div>
 
-              {/* Card Body */}
-              <div className="space-y-4">
+              {/* Card Details */}
+              <div className="space-y-4 text-xs">
                 <div>
-                  <p className="text-[9px] text-slate-400 uppercase tracking-widest">Member ID</p>
-                  <p className="font-mono font-black text-lg text-white tracking-widest">{generatedMemberId}</p>
+                  <p className="text-[9px] text-gray-400">MEMBER ID</p>
+                  <p className="font-bold text-lg text-[#D92323]">{generatedMemberId}</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <p className="text-[9px] text-slate-400 uppercase">Card Holder</p>
-                    <p className="font-bold text-slate-200">{riderDetails.fullName || 'Registered Rider'}</p>
+                    <p className="text-[9px] text-gray-400">CARD HOLDER:</p>
+                    <p className="font-bold text-white">{riderDetails.fullName || 'Registered Rider'}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-slate-400 uppercase">Motorcycle</p>
-                    <p className="font-bold text-slate-200">{riderDetails.bikeModel || 'Squad Rider'}</p>
+                    <p className="text-[9px] text-gray-400">VEHICLE:</p>
+                    <p className="font-bold text-white">{riderDetails.bikeModel || 'Squad Rider'}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Card Footer with QR */}
-              <div className="pt-3 border-t border-white/10 flex justify-between items-end">
+              {/* QR Code */}
+              <div className="pt-3 border-t border-[#4A4C50] flex justify-between items-end">
                 <div>
-                  <p className="text-[8px] text-slate-400 uppercase">Valid Thru</p>
-                  <p className="text-xs font-bold text-emerald-400">SEPTEMBER 2027</p>
+                  <p className="text-[8px] text-gray-400">VALID THRU</p>
+                  <p className="text-xs font-bold text-[#FF5E00]">SEPTEMBER 2027</p>
                 </div>
-                <div className="w-12 h-12 bg-white p-1 rounded-lg">
+                <div className="w-12 h-12 bg-white p-1">
                   <QrCode className="w-full h-full text-black" />
                 </div>
               </div>
@@ -366,18 +312,18 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
+            <div className="flex gap-3 max-w-md mx-auto pt-2">
               <button
                 onClick={() => window.print()}
-                className="flex-1 bg-slate-900 border border-white/20 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2"
+                className="btn-secondary flex-1 py-3 text-xs flex items-center justify-center gap-2"
               >
-                <Printer className="w-4 h-4" /> Download / Print VIP Card
+                <Printer className="w-4 h-4" /> Print VIP Card
               </button>
               <button
                 onClick={onClose}
-                className="flex-1 bg-[#FFB800] text-black font-extrabold text-xs py-3 rounded-xl flex items-center justify-center gap-2"
+                className="btn-red flex-1 py-3 text-xs"
               >
-                Return to Clubhouse
+                Return to Pit Stop
               </button>
             </div>
 

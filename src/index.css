@@ -2,80 +2,118 @@
 
 @layer base {
   :root {
-    --primary: #FF3D00;
-    --primary-hover: #D63300;
-    --gold: #FFB800;
-    --bg-dark: #08090C;
-    --bg-card: #11141F;
-    --bg-card-hover: #171B29;
-    --border-color: rgba(255, 255, 255, 0.12);
+    --asphalt: #1A1A1A;
+    --charcoal: #111111;
+    --engine-grey: #4A4C50;
+    --high-rev-red: #D92323;
+    --safety-orange: #FF5E00;
+    --worn-leather: #8B5A2B;
+    --exhaust-white: #E5E7EB;
   }
 
   body {
-    background-color: var(--bg-dark);
-    color: #F8FAFC;
+    background-color: var(--asphalt);
+    color: var(--exhaust-white);
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, .font-display {
     font-family: 'Bebas Neue', 'Montserrat', sans-serif;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
   }
 
-  .font-telemetry {
+  .font-mono {
     font-family: 'Space Grotesk', monospace;
   }
 }
 
-/* Mechanical Grid & Background Textures */
-.mechanical-grid {
-  background-color: #08090C;
+/* Garage OS Background & Card Systems */
+.garage-bg {
+  background-color: #1A1A1A;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(74, 76, 80, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(74, 76, 80, 0.15) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-.tactile-card {
-  background: rgba(17, 20, 31, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+.garage-card {
+  background-color: #111111;
+  border: 2px solid #4A4C50;
+  transition: all 0.3s ease;
 }
 
-.tactile-card:hover {
-  border-color: rgba(255, 61, 0, 0.4);
-  transform: translateY(-2px);
+.garage-card:hover {
+  border-color: #E5E7EB;
 }
 
-.tactile-card-glow {
-  background: rgba(17, 20, 31, 0.9);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 61, 0, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(255, 61, 0, 0.2);
+.garage-card-red {
+  background-color: #111111;
+  border: 2px solid #D92323;
+  border-left-width: 6px;
+  box-shadow: 0 0 15px rgba(217, 35, 35, 0.2);
 }
 
-/* Gradient Text Utilities */
-.flame-gradient-text {
-  background: linear-gradient(135deg, #FF3D00 0%, #FF7700 50%, #FFB800 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.garage-card-orange {
+  background-color: #111111;
+  border: 2px solid #FF5E00;
+  border-left-width: 6px;
+  box-shadow: 0 0 15px rgba(255, 94, 0, 0.2);
 }
 
-.gold-gradient-text {
-  background: linear-gradient(135deg, #FFB800 0%, #FFE082 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.garage-card-leather {
+  background-color: #111111;
+  border: 2px solid #8B5A2B;
+  border-left-width: 6px;
+  box-shadow: 0 0 15px rgba(139, 90, 43, 0.2);
 }
 
-.flame-glow {
-  box-shadow: 0 0 25px rgba(255, 61, 0, 0.4);
+/* Button & Shadow FX */
+.btn-red {
+  background-color: #D92323;
+  color: #FFFFFF;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid #D92323;
+  transition: all 0.3s ease;
 }
 
-.flame-glow-sm {
-  box-shadow: 0 0 12px rgba(255, 61, 0, 0.3);
+.btn-red:hover {
+  background-color: transparent;
+  color: #D92323;
+  box-shadow: 0 0 20px rgba(217, 35, 35, 0.5);
+}
+
+.btn-orange {
+  background-color: #FF5E00;
+  color: #000000;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid #FF5E00;
+  transition: all 0.3s ease;
+}
+
+.btn-orange:hover {
+  background-color: transparent;
+  color: #FF5E00;
+  box-shadow: 0 0 20px rgba(255, 94, 0, 0.5);
+}
+
+.btn-secondary {
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid #4A4C50;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: #FFFFFF;
+  background-color: #222222;
 }
 
 /* Custom Scrollbar */
@@ -84,17 +122,17 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090C;
+  background: #1A1A1A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E2333;
-  border-radius: 4px;
+  background: #4A4C50;
+  border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF3D00;
+  background: #D92323;
 }
 
-/* Animations */
+/* Modal Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }

@@ -16,50 +16,49 @@ import {
   ChevronRight,
   Flame,
   Zap,
-  Activity
+  Wrench,
+  Gauge,
+  Droplet
 } from 'lucide-react';
 
 export default function Home({ setActiveTab, onOpenBooking, onOpenMembership }) {
   return (
-    <div className="space-y-24 pb-16">
+    <div className="space-y-20 pb-16">
       
       {/* EDITORIAL HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden mechanical-grid">
+      <section className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden garage-bg">
         
-        {/* Background Image & Editorial Overlay */}
+        {/* Hero Background */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/hero-biker.jpg" 
             alt="R.A.T.S Motorcycle Riders" 
-            className="w-full h-full object-cover object-center filter brightness-[0.45] contrast-125 transition-transform duration-10000 animate-pulse-glow"
+            className="w-full h-full object-cover object-center filter brightness-[0.4] contrast-125 transition-transform duration-10000"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-[#08090C]/80 to-[#08090C]/60"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FF3D00]/20 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/80 to-[#1A1A1A]/60"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8">
           
-          {/* Telemetry Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#11141F]/90 border border-[#FF3D00]/50 px-4 py-2 rounded-full backdrop-blur-md flame-glow-sm">
-            <Flame className="w-4 h-4 text-[#FF3D00] animate-bounce" />
-            <span className="text-xs font-telemetry font-bold tracking-widest text-[#FF3D00] uppercase">
-              THE ULTIMATE BIKER SQUAD & CAFE
-            </span>
+          {/* Work Order Terminal Badge */}
+          <div className="inline-flex items-center gap-3 bg-[#111111] border-2 border-[#4A4C50] px-5 py-2 font-mono text-xs text-[#FF5E00]">
+            <span className="w-2.5 h-2.5 bg-[#D92323] animate-pulse"></span>
+            <span className="font-bold tracking-widest uppercase">SYSTEM READY // SQUAD SQUADRON HQ</span>
           </div>
 
-          {/* High-Impact Headline (Bebas Neue Display) */}
-          <div className="space-y-3 max-w-5xl mx-auto">
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-white tracking-wider uppercase leading-none">
-              RIDE & TOUR <br className="hidden sm:inline" />
-              <span className="flame-gradient-text">THE WORLD</span>
+          {/* Heavy Condensed Display Headline */}
+          <div className="space-y-4 max-w-5xl mx-auto">
+            <h1 className="font-black text-6xl sm:text-8xl md:text-9xl text-white tracking-tighter uppercase leading-none">
+              BUILT FOR THE RIDE <br className="hidden sm:inline" />
+              <span className="text-[#D92323]">RIDE & TOUR THE WORLD</span>
             </h1>
-            <p className="text-base sm:text-xl font-light text-slate-300 italic tracking-widest uppercase">
+            <p className="text-base sm:text-xl font-mono text-[#8B5A2B] uppercase tracking-widest font-bold">
               "YOU LIVE JUST ONCE — RIDE LIKE IT!"
             </p>
           </div>
 
           {/* Subtitle */}
-          <p className="max-w-2xl mx-auto text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
             R.A.T.S is a high-energy collective of touring riders, custom bike purists, and highway enthusiasts. Joining our rider squad is completely free — always has been, always will be!
           </p>
 
@@ -67,37 +66,44 @@ export default function Home({ setActiveTab, onOpenBooking, onOpenMembership }) 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 max-w-lg mx-auto">
             <button
               onClick={onOpenBooking}
-              className="w-full sm:w-auto bg-[#FF3D00] hover:bg-[#D63300] text-white font-extrabold text-xs px-8 py-4 rounded-xl shadow-xl flame-glow transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+              className="btn-red w-full sm:w-auto py-4 px-8 text-sm flex items-center justify-center gap-2"
             >
-              <Sparkles className="w-5 h-5" />
-              <span>Book Bike Spa & Detailing</span>
+              <Wrench className="w-5 h-5" />
+              <span>Book a Bay / Spa</span>
             </button>
             <button
               onClick={onOpenMembership}
-              className="w-full sm:w-auto bg-[#11141F]/90 hover:bg-slate-800 text-[#FFB800] border border-[#FFB800]/50 font-bold text-xs px-8 py-4 rounded-xl backdrop-blur-md transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+              className="btn-orange w-full sm:w-auto py-4 px-8 text-sm flex items-center justify-center gap-2"
             >
-              <Award className="w-5 h-5 text-[#FFB800]" />
-              <span>VIP Priority Membership</span>
+              <Award className="w-5 h-5" />
+              <span>VIP Membership</span>
             </button>
           </div>
 
-          {/* Telemetry Stats Ticker */}
-          <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto font-telemetry">
-            <div className="tactile-card p-5 rounded-2xl text-center space-y-1">
-              <p className="text-3xl sm:text-4xl font-black text-white">12,500+</p>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">KM HIGHWAY TOURED</p>
+          {/* Diagnostics Stats Bar */}
+          <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto font-mono">
+            <div className="bg-[#111111] border-2 border-[#4A4C50] p-5 text-center space-y-1">
+              <div className="text-[#D92323] text-xs font-bold mb-1">{">>"} KM TOURED</div>
+              <p className="text-3xl font-black text-white">12,500+</p>
+              <p className="text-[10px] text-[#4A4C50] uppercase tracking-widest">HIGHWAY MILES</p>
             </div>
-            <div className="tactile-card p-5 rounded-2xl text-center space-y-1">
-              <p className="text-3xl sm:text-4xl font-black text-[#FF3D00]">450+</p>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">SQUAD RIDERS</p>
+
+            <div className="bg-[#111111] border-2 border-[#FF5E00] p-5 text-center space-y-1">
+              <div className="text-[#FF5E00] text-xs font-bold mb-1">{">>"} SQUAD RIDERS</div>
+              <p className="text-3xl font-black text-white">450+</p>
+              <p className="text-[10px] text-[#FF5E00] uppercase tracking-widest">ACTIVE MEMBERS</p>
             </div>
-            <div className="tactile-card p-5 rounded-2xl text-center space-y-1">
-              <p className="text-3xl sm:text-4xl font-black text-white">98+</p>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">BREAKFAST RIDES</p>
+
+            <div className="bg-[#111111] border-2 border-[#4A4C50] p-5 text-center space-y-1">
+              <div className="text-[#D92323] text-xs font-bold mb-1">{">>"} BREAKFAST RIDES</div>
+              <p className="text-3xl font-black text-white">98+</p>
+              <p className="text-[10px] text-[#4A4C50] uppercase tracking-widest">COMPLETED RUNS</p>
             </div>
-            <div className="tactile-card p-5 rounded-2xl text-center space-y-1">
-              <p className="text-3xl sm:text-4xl font-black text-[#FFB800]">4.9 ★</p>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">SPA RATING</p>
+
+            <div className="bg-[#111111] border-2 border-[#8B5A2B] p-5 text-center space-y-1">
+              <div className="text-[#8B5A2B] text-xs font-bold mb-1">{">>"} BAY RATING</div>
+              <p className="text-3xl font-black text-white">4.9 ★</p>
+              <p className="text-[10px] text-[#8B5A2B] uppercase tracking-widest">VERIFIED SPA</p>
             </div>
           </div>
 
@@ -105,50 +111,49 @@ export default function Home({ setActiveTab, onOpenBooking, onOpenMembership }) 
       </section>
 
 
-      {/* EDITORIAL SECTION: R.A.T.S ON THE ROADS */}
+      {/* SECTION: R.A.T.S ON THE ROADS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Text Column */}
+          {/* Left Column */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-[#FF3D00]/10 border border-[#FF3D00]/30 px-3.5 py-1.5 rounded-full text-xs font-telemetry font-bold text-[#FF3D00] uppercase tracking-wider">
-              <Compass className="w-4 h-4" />
-              <span>R.A.T.S ON THE ROADS</span>
+            <div className="inline-block bg-[#111111] border border-[#4A4C50] px-3.5 py-1.5 font-mono text-xs text-[#D92323] uppercase tracking-widest">
+              // SQUAD MANIFESTO
             </div>
-            <h2 className="font-display text-4xl sm:text-6xl text-white tracking-wide uppercase leading-tight">
+            <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white leading-none">
               JUST FOR THE <br />
-              <span className="flame-gradient-text">LOVE OF THE ROADS</span>
+              <span className="text-[#FF5E00]">LOVE OF THE ROADS</span>
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
               Travel is a passion and many put it away indefinitely for "someday". R.A.T.S is a group of high-energy road riders and tourers who lead the way for all travel enthusiasts. Join us. Signing up on the rider group is free. It always will be that!
             </p>
             
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#FF3D00] shrink-0" />
-                <span className="text-xs sm:text-sm font-semibold text-slate-200">Weekend Highway & Twisties Rides every Saturday & Sunday</span>
+            <div className="space-y-3 pt-2 font-mono text-xs">
+              <div className="flex items-center gap-3 bg-[#111111] border border-[#4A4C50] p-3 text-gray-200">
+                <CheckCircle2 className="w-5 h-5 text-[#D92323] shrink-0" />
+                <span>WEEKEND BREAKFAST & TWISTIES RIDES EVERY SATURDAY & SUNDAY</span>
               </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#FF3D00] shrink-0" />
-                <span className="text-xs sm:text-sm font-semibold text-slate-200">Dedicated Motorcycle Detailing & Ceramic Spa Bay</span>
+              <div className="flex items-center gap-3 bg-[#111111] border border-[#4A4C50] p-3 text-gray-200">
+                <CheckCircle2 className="w-5 h-5 text-[#FF5E00] shrink-0" />
+                <span>DEDICATED MOTORCYCLE DETAILING & CERAMIC SPA BAY</span>
               </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#FF3D00] shrink-0" />
-                <span className="text-xs sm:text-sm font-semibold text-slate-200">Bikers Cafe with Artisanal Coffee & Protein Bowls</span>
+              <div className="flex items-center gap-3 bg-[#111111] border border-[#4A4C50] p-3 text-gray-200">
+                <CheckCircle2 className="w-5 h-5 text-[#8B5A2B] shrink-0" />
+                <span>BIKERS CAFE WITH ARTISANAL COFFEE & PROTEIN FUEL BOWLS</span>
               </div>
             </div>
 
             <div className="pt-4 flex items-center gap-4">
               <button
                 onClick={() => setActiveTab('rides')}
-                className="bg-[#FF3D00] hover:bg-[#D63300] text-white text-xs font-extrabold px-6 py-3.5 rounded-xl transition-all flex items-center gap-2 flame-glow-sm"
+                className="btn-red px-6 py-3.5 text-xs flex items-center gap-2"
               >
                 <span>View Rides Calendar</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setActiveTab('cafe')}
-                className="bg-[#11141F] hover:bg-slate-800 text-slate-200 border border-white/10 text-xs font-bold px-6 py-3.5 rounded-xl transition-all"
+                className="btn-secondary px-6 py-3.5 text-xs"
               >
                 Explore Cafe Menu
               </button>
@@ -158,27 +163,27 @@ export default function Home({ setActiveTab, onOpenBooking, onOpenMembership }) 
           {/* Right Image Grid */}
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+              <div className="border-2 border-[#4A4C50] overflow-hidden group">
                 <img 
                   src="/bikers-cafe.jpg" 
                   alt="RATS Bikers Cafe Lounge" 
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="tactile-card p-5 rounded-2xl space-y-2">
-                <Coffee className="w-6 h-6 text-[#FF3D00]" />
-                <h4 className="font-bold text-white text-sm">Bikers Lounge & Hub</h4>
-                <p className="text-xs text-slate-400">Coffee, wifi, gear storage & rider networking space.</p>
+              <div className="bg-[#111111] p-5 border-2 border-[#4A4C50] space-y-2">
+                <Coffee className="w-6 h-6 text-[#D92323]" />
+                <h4 className="font-black text-white text-sm uppercase">Bikers Lounge & Hub</h4>
+                <p className="text-xs text-gray-400">Coffee, wifi, gear storage & rider networking space.</p>
               </div>
             </div>
 
             <div className="space-y-4 pt-8">
-              <div className="tactile-card p-5 rounded-2xl space-y-2">
-                <Sparkles className="w-6 h-6 text-[#FFB800]" />
-                <h4 className="font-bold text-white text-sm">Automotive Spa</h4>
-                <p className="text-xs text-slate-400">Snow foam, ceramic coating & chain maintenance.</p>
+              <div className="bg-[#111111] p-5 border-2 border-[#FF5E00] space-y-2">
+                <Sparkles className="w-6 h-6 text-[#FF5E00]" />
+                <h4 className="font-black text-white text-sm uppercase">Automotive Spa</h4>
+                <p className="text-xs text-gray-400">Snow foam, ceramic coating & chain maintenance.</p>
               </div>
-              <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+              <div className="border-2 border-[#4A4C50] overflow-hidden group">
                 <img 
                   src="/bike-spa.jpg" 
                   alt="RATS Motorcycle Detailing Spa" 
@@ -192,95 +197,90 @@ export default function Home({ setActiveTab, onOpenBooking, onOpenMembership }) 
       </section>
 
 
-      {/* SECTION: 4 PILLARS OF OUR CLUBHOUSE */}
+      {/* SECTION: FOUR PILLARS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-2 mb-12">
-          <span className="text-xs font-telemetry font-bold text-[#FF3D00] uppercase tracking-widest">
-            EXPERIENCE R.A.T.S
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl text-white uppercase">
-            FOUR PILLARS OF OUR CLUBHOUSE
-          </h2>
+        <div className="border-b-2 border-[#4A4C50] pb-4 mb-10 flex justify-between items-end">
+          <div>
+            <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter text-white">Four Pillars of Our Garage</h2>
+            <p className="text-[#8B5A2B] font-mono mt-1 uppercase text-xs">// Pit Stop Infrastructure</p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          {/* Card 1: Bikers Cafe */}
-          <div className="tactile-card p-6 rounded-2xl flex flex-col justify-between group">
+          {/* Pillar 1: Cafe */}
+          <div className="garage-card-red p-6 flex flex-col justify-between group">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#FF3D00]/10 border border-[#FF3D00]/30 flex items-center justify-center text-[#FF3D00] group-hover:bg-[#FF3D00] group-hover:text-white transition-colors">
+              <div className="bg-[#1A1A1A] p-3 border border-[#4A4C50] w-12 h-12 flex items-center justify-center text-[#D92323]">
                 <Coffee className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg text-white">R.A.T.S Bikers Cafe</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-black text-xl uppercase tracking-tighter text-white">R.A.T.S Bikers Cafe</h3>
+              <p className="text-xs text-gray-300 leading-relaxed">
                 Freshly roasted artisanal coffee, espresso, high-protein breakfast plates, smoothies, and rider snacks.
               </p>
             </div>
             <button
               onClick={() => setActiveTab('cafe')}
-              className="mt-6 text-xs font-bold text-[#FF3D00] flex items-center gap-1 hover:gap-2 transition-all"
+              className="mt-6 font-mono text-xs font-bold text-[#D92323] flex items-center gap-1 hover:gap-2 transition-all uppercase"
             >
               <span>View Cafe Menu</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Card 2: Bike Spa & Detailing */}
-          <div className="tactile-card-glow p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between">
-            <span className="absolute top-3 right-3 bg-[#FF3D00] text-white text-[9px] font-telemetry font-extrabold px-2.5 py-0.5 rounded-full uppercase">
-              ONLINE ESTIMATOR
-            </span>
+          {/* Pillar 2: Detailing Spa */}
+          <div className="garage-card-orange p-6 flex flex-col justify-between group">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#FF3D00] text-white flex items-center justify-center flame-glow-sm">
-                <Sparkles className="w-6 h-6" />
+              <div className="bg-[#1A1A1A] p-3 border border-[#FF5E00] w-12 h-12 flex items-center justify-center text-[#FF5E00]">
+                <Droplet className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg text-white">Bike Spa & Detailing</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="font-black text-xl uppercase tracking-tighter text-white">Bike Spa & Detailing</h3>
+              <p className="text-xs text-gray-300 leading-relaxed">
                 Precision foam wash, ceramic pro shield, chain lube & tensioning, engine oil replacement.
               </p>
             </div>
             <button
               onClick={onOpenBooking}
-              className="mt-6 w-full bg-[#FF3D00] hover:bg-[#D63300] text-white text-xs font-extrabold py-3 rounded-xl transition-all shadow-md text-center flame-glow-sm"
+              className="btn-orange mt-6 w-full py-3 text-xs text-center"
             >
-              Calculate Cost & Book
+              Schedule Service
             </button>
           </div>
 
-          {/* Card 3: Priority VIP Membership */}
-          <div className="tactile-card p-6 rounded-2xl border-[#FFB800]/30 hover:border-[#FFB800] transition-all flex flex-col justify-between group">
+          {/* Pillar 3: Priority VIP Membership */}
+          <div className="garage-card-leather p-6 flex flex-col justify-between group">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#FFB800]/10 border border-[#FFB800]/40 flex items-center justify-center text-[#FFB800]">
+              <div className="bg-[#1A1A1A] p-3 border border-[#8B5A2B] w-12 h-12 flex items-center justify-center text-[#8B5A2B]">
                 <Award className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg text-white">Priority VIP Club</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-black text-xl uppercase tracking-tighter text-white">Priority VIP Club</h3>
+              <p className="text-xs text-gray-300 leading-relaxed">
                 20% Cafe discounts, free monthly washes, VIP lounge access, and exclusive track day passes.
               </p>
             </div>
             <button
               onClick={onOpenMembership}
-              className="mt-6 text-xs font-bold text-[#FFB800] flex items-center gap-1 hover:gap-2 transition-all"
+              className="mt-6 font-mono text-xs font-bold text-[#8B5A2B] flex items-center gap-1 hover:gap-2 transition-all uppercase"
             >
               <span>Explore VIP Perks</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Card 4: Rides Calendar */}
-          <div className="tactile-card p-6 rounded-2xl flex flex-col justify-between group">
+          {/* Pillar 4: Rides Calendar */}
+          <div className="garage-card p-6 flex flex-col justify-between group">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-slate-800 border border-white/10 flex items-center justify-center text-slate-200">
+              <div className="bg-[#1A1A1A] p-3 border border-[#4A4C50] w-12 h-12 flex items-center justify-center text-[#E5E7EB]">
                 <Calendar className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg text-white">Cafe Rides Calendar</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-black text-xl uppercase tracking-tighter text-white">Cafe Rides Calendar</h3>
+              <p className="text-xs text-gray-300 leading-relaxed">
                 Join our squad for upcoming highway rides, coffee runs, and multi-state touring expeditions.
               </p>
             </div>
             <button
               onClick={() => setActiveTab('rides')}
-              className="mt-6 text-xs font-bold text-slate-200 flex items-center gap-1 hover:gap-2 transition-all"
+              className="mt-6 font-mono text-xs font-bold text-white flex items-center gap-1 hover:gap-2 transition-all uppercase"
             >
               <span>View Ride Dates</span>
               <ChevronRight className="w-4 h-4" />
@@ -291,33 +291,31 @@ export default function Home({ setActiveTab, onOpenBooking, onOpenMembership }) 
       </section>
 
 
-      {/* UPCOMING FEATURED RIDE PROMO */}
+      {/* EXPEDITION PROMO */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#141724] to-[#0A0C12] border border-white/10 p-8 sm:p-12 shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF3D00]/10 rounded-full blur-3xl pointer-events-none"></div>
-
+        <div className="bg-[#111111] border-2 border-[#D92323] border-l-8 p-8 sm:p-12 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 bg-[#FF3D00] text-white px-3 py-1 rounded-full text-xs font-telemetry font-black uppercase">
-                <Zap className="w-3.5 h-3.5" /> NEXT SQUAD EXPEDITION
+              <div className="inline-block bg-[#D92323] text-white px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest">
+                NEXT SQUAD EXPEDITION
               </div>
-              <h3 className="font-display text-3xl sm:text-5xl text-white tracking-wide">
+              <h3 className="font-black text-3xl sm:text-5xl uppercase tracking-tighter text-white">
                 SUNRISE HIGHWAY RUN TO NANDI HILLS & COFFEE SPA
               </h3>
-              <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
+              <p className="text-gray-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
                 60 KM Morning Twisties Ride • Assembly at R.A.T.S Cafe at 5:00 AM • Complimentary Breakfast for VIP Members.
               </p>
-              <div className="flex flex-wrap items-center gap-6 pt-2 text-xs font-telemetry font-semibold text-slate-300">
-                <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#FF3D00]" /> Saturday, 6:00 AM</span>
-                <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#FF3D00]" /> Starting at Indiranagar HQ</span>
-                <span className="flex items-center gap-1.5"><Users className="w-4 h-4 text-[#FF3D00]" /> 34 Riders RSVP'd</span>
+              <div className="flex flex-wrap items-center gap-6 pt-2 font-mono text-xs text-gray-300">
+                <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#D92323]" /> SATURDAY, 6:00 AM</span>
+                <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#D92323]" /> INDIRANAGAR HQ</span>
+                <span className="flex items-center gap-1.5"><Users className="w-4 h-4 text-[#D92323]" /> 34 RIDERS REGISTERED</span>
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
+            <div className="lg:col-span-4 flex flex-col gap-3 justify-end">
               <button
                 onClick={() => setActiveTab('rides')}
-                className="w-full bg-[#FF3D00] hover:bg-[#D63300] text-white font-extrabold text-xs py-4 rounded-xl shadow-xl flame-glow transition-all text-center"
+                className="btn-red py-4 px-8 text-xs text-center"
               >
                 1-Click RSVP Now
               </button>

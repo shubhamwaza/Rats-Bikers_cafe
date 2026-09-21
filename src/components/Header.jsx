@@ -10,7 +10,8 @@ import {
   X, 
   ChevronRight,
   Flame,
-  Radio
+  Wrench,
+  Gauge
 } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenMembership }) {
@@ -26,10 +27,10 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Home', icon: Flame },
+    { id: 'home', label: 'Pit Stop', icon: Flame },
     { id: 'cafe', label: 'Bikers Cafe', icon: Coffee },
-    { id: 'booking', label: 'Bike Spa & Booking', icon: Sparkles, badge: 'Estimator' },
-    { id: 'membership', label: 'Priority VIP', icon: Award, highlight: true },
+    { id: 'booking', label: 'Bay Booking', icon: Sparkles, badge: 'ESTIMATOR' },
+    { id: 'membership', label: 'VIP Club', icon: Award, highlight: true },
     { id: 'rides', label: 'Rides Calendar', icon: Calendar },
     { id: 'store', label: 'Gear Store', icon: ShoppingBag },
     { id: 'location', label: 'Location & Hours', icon: MapPin },
@@ -38,39 +39,39 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-[#08090C]/95 backdrop-blur-md border-b border-white/10 py-2.5 shadow-2xl' 
-        : 'bg-gradient-to-b from-[#08090C]/95 to-transparent py-4'
+        ? 'bg-[#111111]/95 border-b-2 border-[#4A4C50] py-2.5 shadow-2xl backdrop-blur-md' 
+        : 'bg-gradient-to-b from-[#111111]/95 to-transparent py-4'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Mark with Official R.A.T.S Emblem */}
+          {/* Logo Mark: Official Circular R.A.T.S Tire Emblem */}
           <div 
             onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-12 h-12 rounded-full bg-white/5 p-1 border border-white/20 flame-glow-sm group-hover:scale-105 transition-transform flex items-center justify-center bg-white">
+            <div className="w-12 h-12 rounded-full bg-white p-1 border-2 border-[#4A4C50] group-hover:border-[#D92323] transition-colors flex items-center justify-center shadow-lg">
               <img 
                 src="/rats-logo.png" 
-                alt="R.A.T.S Riding and Touring Squad Official Emblem" 
+                alt="R.A.T.S Riding & Touring Squad Official Emblem" 
                 className="w-full h-full object-contain rounded-full"
               />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-display text-2xl tracking-widest text-white leading-none">R.A.T.S</span>
-                <span className="text-[9px] font-telemetry bg-[#FF3D00]/20 text-[#FF3D00] px-1.5 py-0.5 rounded font-bold border border-[#FF3D00]/40 uppercase">
-                  HQ
+                <span className="font-display text-2xl tracking-wider text-white leading-none">R.A.T.S</span>
+                <span className="text-[9px] font-mono bg-[#D92323] text-white px-1.5 py-0.5 font-bold uppercase tracking-widest">
+                  GARAGE OS
                 </span>
               </div>
-              <p className="text-[9px] font-telemetry text-slate-400 tracking-widest uppercase font-semibold">
+              <p className="text-[9px] font-mono text-[#8B5A2B] tracking-widest uppercase font-bold">
                 Riding & Touring Squad
               </p>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#11141F]/80 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 bg-[#111111] p-1.5 border-2 border-[#4A4C50]">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -78,18 +79,18 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`relative flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
+                  className={`relative flex items-center gap-2 px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 ${
                     isActive 
-                      ? 'bg-gradient-to-r from-[#FF3D00] to-[#FF7700] text-white shadow-lg flame-glow-sm' 
+                      ? 'bg-[#FF5E00] text-black border-2 border-[#FF5E00]' 
                       : item.highlight 
-                        ? 'text-[#FFB800] hover:bg-white/5 hover:text-white' 
-                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                        ? 'text-[#FF5E00] hover:bg-[#1A1A1A] hover:text-white' 
+                        : 'text-slate-300 hover:text-white hover:bg-[#1A1A1A]'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : item.highlight ? 'text-[#FFB800]' : 'text-slate-400'}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-black' : item.highlight ? 'text-[#FF5E00]' : 'text-[#4A4C50]'}`} />
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="bg-[#FF3D00] text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                    <span className="bg-[#D92323] text-white text-[9px] px-1.5 py-0.2 font-mono font-bold uppercase tracking-wider animate-pulse">
                       {item.badge}
                     </span>
                   )}
@@ -100,42 +101,42 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
 
           {/* Right Action Bar */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Live Telemetry Pill */}
-            <div className="hidden lg:flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-full text-xs font-telemetry text-emerald-400">
-              <Radio className="w-3.5 h-3.5 animate-pulse text-emerald-400" />
-              <span>LIVE • CAFE OPEN</span>
+            {/* Live Terminal Pill */}
+            <div className="hidden lg:flex items-center gap-2 bg-[#1A1A1A] border border-[#4A4C50] px-3 py-1.5 font-mono text-xs text-[#FF5E00]">
+              <span className="w-2 h-2 rounded-full bg-[#FF5E00] animate-ping"></span>
+              <span>BAY ACTIVE // CAFE OPEN</span>
             </div>
 
             <button
               onClick={onOpenBooking}
-              className="flex items-center gap-2 bg-[#FF3D00] hover:bg-[#D63300] text-white text-xs font-extrabold px-4 py-2.5 rounded-xl transition-all duration-200 shadow-md hover:scale-105 active:scale-95 flame-glow-sm"
+              className="btn-red px-5 py-2.5 text-xs font-black flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4" />
-              <span>Book Spa</span>
+              <span>Book Bay</span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl bg-[#11141F] border border-white/10 text-slate-300 hover:text-white"
+            className="lg:hidden p-2.5 bg-[#111111] border-2 border-[#4A4C50] text-white"
             aria-label="Toggle Navigation"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-[#FF3D00]" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6 text-[#D92323]" /> : <Menu className="w-6 h-6" />}
           </button>
 
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0A0C12] border-b border-white/10 px-4 py-6 space-y-3 animate-fade-in shadow-2xl">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-              <span className="text-xs font-telemetry text-emerald-400">Cafe Open • Mon-Sun</span>
+        <div className="lg:hidden bg-[#111111] border-b-2 border-[#4A4C50] px-4 py-6 space-y-3 animate-fade-in shadow-2xl">
+          <div className="flex items-center justify-between pb-3 border-b border-[#4A4C50] mb-3 font-mono text-xs">
+            <div className="flex items-center gap-2 text-[#FF5E00]">
+              <span className="w-2 h-2 rounded-full bg-[#FF5E00] animate-ping"></span>
+              <span>CAFE OPEN • MON-SUN</span>
             </div>
-            <span className="text-xs text-slate-400 font-telemetry">Indiranagar HQ</span>
+            <span className="text-[#4A4C50]">GARAGE OS v1.0</span>
           </div>
 
           <div className="grid grid-cols-1 gap-2">
@@ -149,17 +150,17 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
+                  className={`flex items-center justify-between p-3 text-sm font-black uppercase tracking-wider transition-all border-l-4 ${
                     isActive 
-                      ? 'bg-gradient-to-r from-[#FF3D00] to-[#FF7700] text-white' 
-                      : 'bg-[#11141F] text-slate-200 hover:bg-slate-800'
+                      ? 'bg-[#1A1A1A] border-[#FF5E00] text-white' 
+                      : 'bg-[#1A1A1A]/60 border-transparent text-slate-300 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#FF3D00]'}`} />
+                    <Icon className={`w-5 h-5 ${isActive ? 'text-[#FF5E00]' : 'text-[#D92323]'}`} />
                     <span>{item.label}</span>
                   </div>
-                  <ChevronRight className="w-4 h-4 opacity-50" />
+                  <ChevronRight className="w-4 h-4 text-[#4A4C50]" />
                 </button>
               );
             })}
@@ -171,17 +172,17 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
                 onOpenBooking();
                 setMobileMenuOpen(false);
               }}
-              className="w-full bg-[#FF3D00] text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2"
+              className="btn-red w-full py-3 text-xs flex items-center justify-center gap-2"
             >
               <Sparkles className="w-4 h-4" />
-              Book Bike Spa
+              Book Bay
             </button>
             <button
               onClick={() => {
                 onOpenMembership();
                 setMobileMenuOpen(false);
               }}
-              className="w-full bg-gradient-to-r from-[#FFB800] to-[#FF8800] text-black py-3 rounded-xl font-extrabold text-xs flex items-center justify-center gap-2"
+              className="btn-orange w-full py-3 text-xs flex items-center justify-center gap-2"
             >
               <Award className="w-4 h-4" />
               VIP Club
