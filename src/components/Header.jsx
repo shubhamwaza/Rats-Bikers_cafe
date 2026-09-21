@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Bike, 
   Coffee, 
   Calendar, 
   Sparkles, 
@@ -39,26 +38,28 @@ export default function Header({ activeTab, setActiveTab, onOpenBooking, onOpenM
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-[#08090C]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl' 
-        : 'bg-gradient-to-b from-[#08090C]/95 to-transparent py-5'
+        ? 'bg-[#08090C]/95 backdrop-blur-md border-b border-white/10 py-2.5 shadow-2xl' 
+        : 'bg-gradient-to-b from-[#08090C]/95 to-transparent py-4'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Mark */}
+          {/* Logo Mark with Official R.A.T.S Emblem */}
           <div 
             onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-11 h-11 rounded-xl bg-[#FF3D00] p-0.5 flame-glow-sm group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-[#08090C] rounded-[10px] flex items-center justify-center">
-                <Bike className="w-6 h-6 text-[#FF3D00]" />
-              </div>
+            <div className="w-12 h-12 rounded-full bg-white/5 p-1 border border-white/20 flame-glow-sm group-hover:scale-105 transition-transform flex items-center justify-center bg-white">
+              <img 
+                src="/rats-logo.png" 
+                alt="R.A.T.S Riding and Touring Squad Official Emblem" 
+                className="w-full h-full object-contain rounded-full"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-display text-2xl tracking-widest text-white leading-none">R.A.T.S</span>
-                <span className="text-[10px] font-telemetry bg-[#FF3D00]/20 text-[#FF3D00] px-1.5 py-0.5 rounded font-bold border border-[#FF3D00]/40">
+                <span className="text-[9px] font-telemetry bg-[#FF3D00]/20 text-[#FF3D00] px-1.5 py-0.5 rounded font-bold border border-[#FF3D00]/40 uppercase">
                   HQ
                 </span>
               </div>
