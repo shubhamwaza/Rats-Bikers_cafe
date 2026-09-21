@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #FF5500;
+    --primary-hover: #E04B00;
+    --secondary: #FFB800;
+    --bg-dark: #0A0B0E;
+    --bg-card: #12141C;
+    --bg-card-hover: #181B26;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #F1F5F9;
+    font-family: 'Outfit', 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* Glassmorphism & Custom Effects */
+.glass-panel {
+  background: rgba(18, 20, 28, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(18, 20, 28, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 85, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(255, 85, 0, 0.15);
+}
+
+.carbon-pattern {
+  background-color: #0d0f14;
+  background-image: 
+    radial-gradient(rgba(255, 85, 0, 0.08) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, #0d0f14 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FF5500 0%, #FF9900 50%, #FFB800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFB800 0%, #FFE57F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.orange-glow {
+  box-shadow: 0 0 25px rgba(255, 85, 0, 0.4);
+}
+
+.orange-glow-sm {
+  box-shadow: 0 0 12px rgba(255, 85, 0, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0B0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #262936;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF5500;
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
