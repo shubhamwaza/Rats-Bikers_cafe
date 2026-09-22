@@ -2,118 +2,116 @@
 
 @layer base {
   :root {
-    --asphalt: #1A1A1A;
-    --charcoal: #111111;
-    --engine-grey: #4A4C50;
-    --high-rev-red: #D92323;
-    --safety-orange: #FF5E00;
-    --worn-leather: #8B5A2B;
-    --exhaust-white: #E5E7EB;
+    --apple-bg: #000000;
+    --apple-surface: rgba(255, 255, 255, 0.04);
+    --apple-surface-hover: rgba(255, 255, 255, 0.08);
+    --apple-border: rgba(255, 255, 255, 0.1);
+    --apple-border-strong: rgba(255, 255, 255, 0.2);
+    --apple-orange: #FF9500;
+    --apple-red: #FF3B30;
+    --apple-text: #FFFFFF;
+    --apple-subtext: rgba(255, 255, 255, 0.65);
+    --apple-muted: rgba(255, 255, 255, 0.4);
   }
 
   body {
-    background-color: var(--asphalt);
-    color: var(--exhaust-white);
-    font-family: 'Outfit', sans-serif;
+    background-color: var(--apple-bg);
+    color: var(--apple-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     overflow-x: hidden;
+    letter-spacing: -0.01em;
   }
 
-  h1, h2, h3, .font-display {
-    font-family: 'Bebas Neue', 'Montserrat', sans-serif;
-    letter-spacing: 0.03em;
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    letter-spacing: -0.025em;
   }
 
   .font-mono {
-    font-family: 'Space Grotesk', monospace;
+    font-family: 'Space Grotesk', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 }
 
-/* Garage OS Background & Card Systems */
-.garage-bg {
-  background-color: #1A1A1A;
+/* Background Light Leaks & Mesh */
+.apple-bg-mesh {
+  background-color: #000000;
   background-image: 
-    linear-gradient(to right, rgba(74, 76, 80, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(74, 76, 80, 0.15) 1px, transparent 1px);
-  background-size: 32px 32px;
+    radial-gradient(ellipse at 50% -10%, rgba(255, 149, 0, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(255, 59, 48, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 15% 70%, rgba(255, 149, 0, 0.06) 0%, transparent 50%);
 }
 
-.garage-card {
-  background-color: #111111;
-  border: 2px solid #4A4C50;
-  transition: all 0.3s ease;
+/* Glassmorphism Containers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
 }
 
-.garage-card:hover {
-  border-color: #E5E7EB;
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.garage-card-red {
-  background-color: #111111;
-  border: 2px solid #D92323;
-  border-left-width: 6px;
-  box-shadow: 0 0 15px rgba(217, 35, 35, 0.2);
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
 
-.garage-card-orange {
-  background-color: #111111;
-  border: 2px solid #FF5E00;
-  border-left-width: 6px;
-  box-shadow: 0 0 15px rgba(255, 94, 0, 0.2);
+.glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
 }
 
-.garage-card-leather {
-  background-color: #111111;
-  border: 2px solid #8B5A2B;
-  border-left-width: 6px;
-  box-shadow: 0 0 15px rgba(139, 90, 43, 0.2);
-}
-
-/* Button & Shadow FX */
-.btn-red {
-  background-color: #D92323;
+/* Button FX */
+.apple-btn-primary {
+  background: linear-gradient(135deg, #FF9500 0%, #FF3B30 100%);
   color: #FFFFFF;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 2px solid #D92323;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px -5px rgba(255, 149, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-red:hover {
-  background-color: transparent;
-  color: #D92323;
-  box-shadow: 0 0 20px rgba(217, 35, 35, 0.5);
+.apple-btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px -5px rgba(255, 149, 0, 0.5);
 }
 
-.btn-orange {
-  background-color: #FF5E00;
-  color: #000000;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 2px solid #FF5E00;
-  transition: all 0.3s ease;
+.apple-btn-primary:active {
+  transform: scale(0.97);
 }
 
-.btn-orange:hover {
-  background-color: transparent;
-  color: #FF5E00;
-  box-shadow: 0 0 20px rgba(255, 94, 0, 0.5);
-}
-
-.btn-secondary {
-  background-color: #1A1A1A;
+.apple-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: #FFFFFF;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 2px solid #4A4C50;
-  transition: all 0.3s ease;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-secondary:hover {
-  border-color: #FFFFFF;
-  background-color: #222222;
+.apple-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
+}
+
+.apple-btn-secondary:active {
+  transform: scale(0.97);
 }
 
 /* Custom Scrollbar */
@@ -122,22 +120,31 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #1A1A1A;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4A4C50;
-  border-radius: 0px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D92323;
+  background: rgba(255, 149, 0, 0.6);
 }
 
 /* Modal Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.97); }
+@keyframes appleModalIn {
+  from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-apple-modal {
+  animation: appleModalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

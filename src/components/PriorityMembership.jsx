@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { 
   Award, 
   Check, 
-  Crown, 
-  Sparkles, 
-  Coffee, 
-  ArrowRight,
-  Gift
+  ArrowRight
 } from 'lucide-react';
 
 export default function PriorityMembership({ onOpenPayment }) {
@@ -20,9 +16,8 @@ export default function PriorityMembership({ onOpenPayment }) {
       priceAnnual: 0,
       priceMonthly: 0,
       popular: false,
-      badgeColor: 'bg-[#1A1A1A] text-gray-400 border border-[#4A4C50]',
-      cardStyle: 'garage-card',
-      buttonStyle: 'btn-secondary cursor-default text-gray-500',
+      badgeColor: 'glass-pill px-2.5 py-0.5 text-slate-400',
+      buttonStyle: 'apple-btn-secondary opacity-60 cursor-default text-slate-400',
       buttonText: 'Current Basic Tier',
       features: [
         'Access to public weekend breakfast rides',
@@ -38,9 +33,8 @@ export default function PriorityMembership({ onOpenPayment }) {
       priceAnnual: 999,
       priceMonthly: 119,
       popular: false,
-      badgeColor: 'bg-[#1A1A1A] text-white border border-[#4A4C50]',
-      cardStyle: 'garage-card-orange',
-      buttonStyle: 'btn-orange',
+      badgeColor: 'glass-pill px-2.5 py-0.5 text-orange-400 font-semibold',
+      buttonStyle: 'apple-btn-primary',
       buttonText: 'Join Silver Club',
       features: [
         '10% Discount on all Cafe food & brews',
@@ -57,9 +51,8 @@ export default function PriorityMembership({ onOpenPayment }) {
       priceAnnual: 2499,
       priceMonthly: 249,
       popular: true,
-      badgeColor: 'bg-[#FF5E00] text-black font-black',
-      cardStyle: 'garage-card-red',
-      buttonStyle: 'btn-red',
+      badgeColor: 'bg-gradient-to-r from-orange-500 to-rose-600 text-white font-bold px-2.5 py-0.5 rounded-full',
+      buttonStyle: 'apple-btn-primary shadow-lg shadow-orange-500/30',
       buttonText: 'Get Gold VIP Membership',
       features: [
         '20% Discount on all Cafe food & brews',
@@ -78,9 +71,8 @@ export default function PriorityMembership({ onOpenPayment }) {
       priceAnnual: 4999,
       priceMonthly: 499,
       popular: false,
-      badgeColor: 'bg-[#8B5A2B] text-white font-black',
-      cardStyle: 'garage-card-leather',
-      buttonStyle: 'btn-orange',
+      badgeColor: 'glass-pill px-2.5 py-0.5 text-amber-400 font-bold',
+      buttonStyle: 'apple-btn-secondary border-amber-500/40 text-amber-300',
       buttonText: 'Join Platinum Legends',
       features: [
         '30% Discount on all Cafe food & brews',
@@ -95,69 +87,77 @@ export default function PriorityMembership({ onOpenPayment }) {
   ];
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 min-h-screen">
       
       {/* Header */}
-      <div className="border-b-2 border-[#4A4C50] pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+      <div className="glass-panel p-8 sm:p-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
         <div>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">Priority VIP Club Membership</h1>
-          <p className="text-[#8B5A2B] font-mono mt-1 uppercase text-xs">// Pit Stop Privileges</p>
+          <div className="inline-flex items-center gap-2 glass-pill px-3 py-1 text-xs text-orange-400 font-mono mb-2">
+            <Award className="w-3.5 h-3.5 text-orange-400" />
+            <span>Pit Stop Privileges</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Priority VIP Club Membership</h1>
+          <p className="text-slate-400 text-sm mt-1">Unlock exclusive spa discounts, VIP lounge access, free monthly washes, and squad gear.</p>
         </div>
 
-        {/* Toggle */}
-        <div className="flex items-center gap-3 font-mono text-xs">
+        {/* Toggle Switch */}
+        <div className="flex items-center gap-1 bg-white/[0.05] p-1.5 rounded-full border border-white/10 backdrop-blur-md">
           <button
             onClick={() => setBillingCycle('monthly')}
-            className={`px-3 py-1.5 font-bold uppercase transition-all ${billingCycle === 'monthly' ? 'bg-[#FF5E00] text-black' : 'bg-[#111111] text-gray-400 border border-[#4A4C50]'}`}
+            className={`px-4 py-2 text-xs font-medium rounded-full transition-all active:scale-95 ${
+              billingCycle === 'monthly' ? 'bg-white/20 text-white shadow-sm' : 'text-slate-400 hover:text-white'
+            }`}
           >
             Monthly
           </button>
           <button
             onClick={() => setBillingCycle('annual')}
-            className={`px-3 py-1.5 font-bold uppercase transition-all ${billingCycle === 'annual' ? 'bg-[#D92323] text-white' : 'bg-[#111111] text-gray-400 border border-[#4A4C50]'}`}
+            className={`px-4 py-2 text-xs font-semibold rounded-full transition-all active:scale-95 ${
+              billingCycle === 'annual' ? 'apple-btn-primary' : 'text-slate-400 hover:text-white'
+            }`}
           >
             Annual (Save 20%)
           </button>
         </div>
       </div>
 
-      {/* Tiers */}
+      {/* Tiers Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
         {membershipTiers.map((tier) => {
           const price = billingCycle === 'annual' ? tier.priceAnnual : tier.priceMonthly;
           return (
             <div
               key={tier.id}
-              className={`${tier.cardStyle} p-6 flex flex-col justify-between relative`}
+              className={`glass-card p-7 flex flex-col justify-between relative ${tier.popular ? 'border-orange-500/50 bg-white/[0.06]' : ''}`}
             >
               {tier.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#D92323] text-white text-[9px] font-mono font-black px-3 py-1 uppercase tracking-widest border border-[#D92323]">
-                  MOST POPULAR VIP CHOICE
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-rose-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-orange-500/25">
+                  Most Popular Choice
                 </div>
               )}
 
               <div className="space-y-6">
                 
                 <div className="space-y-2">
-                  <span className={`inline-block font-mono text-[10px] px-2.5 py-0.5 uppercase ${tier.badgeColor}`}>
+                  <span className={`inline-block text-xs ${tier.badgeColor}`}>
                     {tier.name}
                   </span>
-                  <p className="text-xs text-gray-400">{tier.tagline}</p>
+                  <p className="text-xs text-slate-400">{tier.tagline}</p>
                 </div>
 
-                <div className="border-y border-[#4A4C50] py-4 font-mono">
+                <div className="border-y border-white/10 py-4 font-mono">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-black text-white">₹{price}</span>
-                    <span className="text-xs text-gray-400">/{billingCycle === 'annual' ? 'YR' : 'MO'}</span>
+                    <span className="text-4xl font-extrabold text-white">₹{price}</span>
+                    <span className="text-xs text-slate-400">/{billingCycle === 'annual' ? 'yr' : 'mo'}</span>
                   </div>
                 </div>
 
-                <div className="space-y-2.5">
-                  <p className="text-[10px] font-mono font-bold text-[#8B5A2B] uppercase">// PERKS INCLUDED:</p>
-                  <ul className="space-y-2">
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Perks Included:</p>
+                  <ul className="space-y-2.5">
                     {tier.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-gray-300">
-                        <Check className="w-4 h-4 text-[#D92323] shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                        <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -169,7 +169,7 @@ export default function PriorityMembership({ onOpenPayment }) {
               <div className="pt-8">
                 <button
                   onClick={() => tier.id !== 'free' && onOpenPayment(tier, billingCycle)}
-                  className={`${tier.buttonStyle} w-full py-3.5 text-xs flex items-center justify-center gap-2`}
+                  className={`${tier.buttonStyle} w-full py-3.5 text-xs font-semibold flex items-center justify-center gap-2 active:scale-95`}
                 >
                   <span>{tier.buttonText}</span>
                   {tier.id !== 'free' && <ArrowRight className="w-4 h-4" />}
@@ -184,3 +184,4 @@ export default function PriorityMembership({ onOpenPayment }) {
     </div>
   );
 }
+

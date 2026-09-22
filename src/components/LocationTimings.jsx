@@ -6,9 +6,7 @@ import {
   Mail, 
   Send, 
   CheckCircle2, 
-  Navigation,
-  Compass,
-  Bike
+  Navigation
 } from 'lucide-react';
 
 export default function LocationTimings() {
@@ -21,18 +19,18 @@ export default function LocationTimings() {
   };
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 min-h-screen">
       
       {/* Header */}
-      <div className="text-center space-y-4">
-        <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-4 py-1.5 rounded-full text-xs font-bold text-emerald-400 uppercase tracking-wider">
-          <Clock className="w-4 h-4" />
+      <div className="text-center space-y-4 max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 text-xs font-mono text-emerald-400">
+          <Clock className="w-4 h-4 text-emerald-400" />
           <span>Clubhouse Timings & Directions</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-          Location & <span className="text-gradient-orange">Operating Hours</span>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Location & <span className="bg-gradient-to-r from-orange-400 to-rose-500 bg-clip-text text-transparent">Operating Hours</span>
         </h1>
-        <p className="text-slate-400 text-sm max-w-2xl mx-auto">
+        <p className="text-slate-400 text-sm">
           Visit the R.A.T.S Clubhouse in Indiranagar. Open early for sunrise riders and late for evening lounge coffee chats.
         </p>
       </div>
@@ -43,38 +41,38 @@ export default function LocationTimings() {
         <div className="lg:col-span-6 space-y-6">
           
           {/* Operating Hours Box */}
-          <div className="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+          <div className="glass-panel p-6 sm:p-8 space-y-4 border-white/15">
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-[#FF5500]" />
+                <Clock className="w-5 h-5 text-orange-400" />
                 <h3 className="font-bold text-white text-base">Clubhouse Operating Schedule</h3>
               </div>
-              <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 glass-pill px-3 py-1 font-mono">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 Open Now
               </span>
             </div>
 
             <div className="space-y-3 text-xs">
               <div className="flex justify-between items-center py-2 border-b border-white/5">
-                <span className="text-slate-300 font-semibold">Monday - Friday:</span>
-                <span className="font-mono text-white font-bold">07:00 AM - 11:00 PM</span>
+                <span className="text-slate-300 font-medium">Monday - Friday:</span>
+                <span className="font-mono text-white font-semibold">07:00 AM - 11:00 PM</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-white/5">
-                <span className="text-slate-300 font-semibold">Saturday - Sunday (Breakfast Runs):</span>
-                <span className="font-mono text-[#FF5500] font-extrabold">05:00 AM - Midnight</span>
+                <span className="text-slate-300 font-medium">Saturday - Sunday (Breakfast Runs):</span>
+                <span className="font-mono text-orange-400 font-bold">05:00 AM - Midnight</span>
               </div>
               <div className="flex justify-between items-center py-2">
-                <span className="text-slate-300 font-semibold">Bike Spa & Detailing Bay:</span>
-                <span className="font-mono text-[#FFB800] font-bold">08:00 AM - 08:00 PM</span>
+                <span className="text-slate-300 font-medium">Bike Spa & Detailing Bay:</span>
+                <span className="font-mono text-amber-400 font-semibold">08:00 AM - 08:00 PM</span>
               </div>
             </div>
           </div>
 
           {/* Location & Map Card */}
-          <div className="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+          <div className="glass-panel p-6 sm:p-8 space-y-4 border-white/15">
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-[#FF5500]" />
+              <MapPin className="w-5 h-5 text-orange-400" />
               <h3 className="font-bold text-white text-base">Physical Address & Map</h3>
             </div>
 
@@ -84,29 +82,29 @@ export default function LocationTimings() {
             </p>
 
             {/* Simulated Map Visual */}
-            <div className="relative rounded-2xl overflow-hidden h-48 bg-slate-900 border border-white/10 flex items-center justify-center text-center p-4">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#0F111A] via-[#161A28] to-[#0A0B0E] opacity-90"></div>
+            <div className="relative rounded-2xl overflow-hidden h-48 bg-black/60 border border-white/10 flex items-center justify-center text-center p-4">
+              <div className="absolute inset-0 bg-gradient-to-tr from-black via-black/80 to-transparent"></div>
               <div className="relative z-10 space-y-2">
-                <Navigation className="w-8 h-8 text-[#FF5500] mx-auto animate-bounce" />
+                <Navigation className="w-8 h-8 text-orange-400 mx-auto animate-bounce" />
                 <p className="text-xs font-bold text-white">Interactive Clubhouse Map Preview</p>
                 <a
                   href="https://maps.google.com/?q=Indiranagar+Bengaluru"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-block bg-[#FF5500] text-white text-xs font-bold px-4 py-2 rounded-xl orange-glow-sm"
+                  className="inline-block apple-btn-primary text-xs font-semibold px-4 py-2 active:scale-95"
                 >
                   Open in Google Maps
                 </a>
               </div>
             </div>
 
-            <div className="pt-2 grid grid-cols-2 gap-3 text-xs">
+            <div className="pt-2 grid grid-cols-2 gap-3 text-xs font-mono">
               <div className="flex items-center gap-2 text-slate-300">
-                <Phone className="w-4 h-4 text-[#FF5500]" />
+                <Phone className="w-4 h-4 text-orange-400" />
                 <span>+91 98765 43210</span>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
-                <Mail className="w-4 h-4 text-[#FF5500]" />
+                <Mail className="w-4 h-4 text-orange-400" />
                 <span>ride@rats.com</span>
               </div>
             </div>
@@ -116,7 +114,7 @@ export default function LocationTimings() {
 
         {/* Contact Form */}
         <div className="lg:col-span-6">
-          <div className="glass-panel-glow p-6 sm:p-8 rounded-3xl space-y-6">
+          <div className="glass-panel p-6 sm:p-8 space-y-6 border-white/15">
             <div className="space-y-1">
               <h3 className="font-bold text-white text-xl">Get in Touch with Squad HQ</h3>
               <p className="text-xs text-slate-400">Have questions about rides, custom spa detailing, or membership?</p>
@@ -125,50 +123,50 @@ export default function LocationTimings() {
             {!formSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">Your Name *</label>
+                  <label className="block text-slate-300 font-medium mb-1">Your Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="John Doe"
                     value={contactData.name}
                     onChange={(e) => setContactData({...contactData, name: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">Phone Number *</label>
+                  <label className="block text-slate-300 font-medium mb-1">Phone Number *</label>
                   <input
                     type="tel"
                     required
                     placeholder="+91 98765 43210"
                     value={contactData.phone}
                     onChange={(e) => setContactData({...contactData, phone: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">Message / Inquiry *</label>
+                  <label className="block text-slate-300 font-medium mb-1">Message / Inquiry *</label>
                   <textarea
                     rows={4}
                     required
                     placeholder="Tell us what you need..."
                     value={contactData.message}
                     onChange={(e) => setContactData({...contactData, message: e.target.value})}
-                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#FF5500] hover:bg-[#E04B00] text-white font-extrabold text-xs py-4 rounded-xl shadow-xl orange-glow flex items-center justify-center gap-2"
+                  className="apple-btn-primary w-full text-xs font-semibold py-3.5 flex items-center justify-center gap-2 active:scale-95"
                 >
                   <Send className="w-4 h-4" /> Send Squad Inquiry
                 </button>
               </form>
             ) : (
-              <div className="text-center py-8 space-y-4 animate-fade-in">
+              <div className="text-center py-8 space-y-4 animate-apple-modal">
                 <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
                 <h4 className="text-xl font-bold text-white">Message Received!</h4>
                 <p className="text-xs text-slate-300">
@@ -176,7 +174,7 @@ export default function LocationTimings() {
                 </p>
                 <button
                   onClick={() => setFormSubmitted(false)}
-                  className="bg-slate-900 text-white text-xs font-bold px-6 py-2.5 rounded-xl border border-white/10"
+                  className="apple-btn-secondary text-xs font-medium px-6 py-2.5"
                 >
                   Send Another Message
                 </button>
@@ -190,3 +188,4 @@ export default function LocationTimings() {
     </div>
   );
 }
+

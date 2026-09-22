@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Coffee, 
-  Flame, 
   Plus, 
-  ShoppingBag, 
-  Sparkles, 
-  Clock, 
-  ChevronRight
+  ShoppingBag
 } from 'lucide-react';
 
 export default function BikersCafe() {
@@ -107,35 +103,36 @@ export default function BikersCafe() {
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 min-h-screen">
       
       {/* Header Banner */}
-      <div className="bg-[#111111] border-2 border-[#4A4C50] border-l-8 border-l-[#FF5E00] p-8 sm:p-12 relative overflow-hidden">
+      <div className="glass-panel p-8 sm:p-12 relative overflow-hidden border-orange-500/30">
         <div className="relative z-10 space-y-4 max-w-2xl">
-          <div className="inline-block bg-[#FF5E00] text-black font-mono px-3 py-1 text-xs font-bold uppercase">
-            // CLUBHOUSE GASTRONOMY
+          <div className="inline-flex items-center gap-2 glass-pill px-3 py-1 text-xs text-orange-400 font-mono">
+            <Coffee className="w-3.5 h-3.5 text-orange-400" />
+            <span>Clubhouse Gastronomy</span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
-            R.A.T.S BIKERS CAFE
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
+            R.A.T.S Bikers Cafe
           </h1>
-          <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+          <p className="text-slate-300 text-sm leading-relaxed">
             Where coffee purists meet highway legends. Enjoy specialty single-origin brews, high-protein rider bowls, and gourmet comfort food in our air-conditioned member lounge.
           </p>
         </div>
       </div>
 
       {/* Category Pills & Order Summary */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 font-mono">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 bg-white/[0.04] p-1.5 rounded-full border border-white/10 backdrop-blur-md">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 text-xs font-bold uppercase transition-all ${
+              className={`px-4 py-2 text-xs font-medium rounded-full transition-all active:scale-95 ${
                 activeCategory === cat.id
-                  ? 'bg-[#FF5E00] text-black border-2 border-[#FF5E00]'
-                  : 'bg-[#111111] border-2 border-[#4A4C50] text-gray-300 hover:border-white'
+                  ? 'apple-btn-primary'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
               }`}
             >
               {cat.name}
@@ -144,13 +141,13 @@ export default function BikersCafe() {
         </div>
 
         {cart.length > 0 && (
-          <div className="flex items-center gap-3 bg-[#111111] border-2 border-[#D92323] px-4 py-2">
-            <ShoppingBag className="w-4 h-4 text-[#D92323]" />
-            <span className="text-xs text-gray-300 font-bold">{cart.length} ITEMS</span>
-            <span className="font-black text-white text-sm">₹{cartTotal}</span>
+          <div className="flex items-center gap-3 glass-pill px-4 py-2 text-xs font-mono border-orange-500/50">
+            <ShoppingBag className="w-4 h-4 text-orange-400" />
+            <span className="text-slate-300 font-bold">{cart.length} ITEMS</span>
+            <span className="font-extrabold text-white text-sm">₹{cartTotal}</span>
             <button
               onClick={() => alert(`Pre-order placed for ₹${cartTotal}! Please notify your barista on arrival.`)}
-              className="btn-red text-[11px] px-3 py-1"
+              className="apple-btn-primary text-[11px] px-3.5 py-1.5 font-semibold active:scale-95"
             >
               PRE-ORDER
             </button>
@@ -164,31 +161,31 @@ export default function BikersCafe() {
         {filteredItems.map((item) => (
           <div
             key={item.id}
-            className="bg-[#111111] border-2 border-[#4A4C50] hover:border-[#FF5E00] p-5 flex flex-col justify-between group transition-colors"
+            className="glass-card p-6 flex flex-col justify-between group transition-all"
           >
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="text-3xl">{item.image}</span>
-                <span className="bg-[#1A1A1A] border border-[#4A4C50] text-[#D92323] font-mono text-[9px] font-bold px-2 py-0.5 uppercase">
+                <span className="text-4xl p-2 rounded-2xl bg-white/10">{item.image}</span>
+                <span className="glass-pill px-2.5 py-0.5 text-orange-400 font-mono text-[10px] font-semibold">
                   {item.badge}
                 </span>
               </div>
 
               <div>
-                <h3 className="font-black text-white text-base group-hover:text-[#FF5E00] transition-colors uppercase">
+                <h3 className="font-bold text-white text-base group-hover:text-orange-400 transition-colors">
                   {item.name}
                 </h3>
-                <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#4A4C50] mt-4 flex items-center justify-between font-mono">
-              <span className="font-black text-base text-white">₹{item.price}</span>
+            <div className="pt-4 border-t border-white/10 mt-4 flex items-center justify-between font-mono">
+              <span className="font-extrabold text-lg text-white">₹{item.price}</span>
               <button
                 onClick={() => addToCart(item)}
-                className="bg-[#1A1A1A] hover:bg-[#D92323] text-white border border-[#4A4C50] p-2 transition-all"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-orange-500 text-white flex items-center justify-center transition-all active:scale-95"
                 title="Add to Order"
               >
                 <Plus className="w-4 h-4" />
@@ -201,3 +198,4 @@ export default function BikersCafe() {
     </div>
   );
 }
+

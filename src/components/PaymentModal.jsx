@@ -4,12 +4,9 @@ import {
   CreditCard, 
   QrCode, 
   Building2, 
-  ShieldCheck, 
   Lock, 
-  CheckCircle2, 
   Award, 
   Printer, 
-  Bike,
   ArrowRight
 } from 'lucide-react';
 
@@ -26,11 +23,8 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
     bikeModel: ''
   });
 
-  const [cardInfo, setCardInfo] = useState({ number: '', expiry: '', cvv: '' });
-  const [upiId, setUpiId] = useState('');
   const [otpInput, setOtpInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-
   const [generatedMemberId, setGeneratedMemberId] = useState('');
 
   if (!tier) return null;
@@ -63,17 +57,17 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
       const memberId = `RATS-${tier.name.split(' ')[0].toUpperCase()}-${Math.floor(10000 + Math.random() * 90000)}`;
       setGeneratedMemberId(memberId);
       setStep(3);
-    }, 1500);
+    }, 1200);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in font-mono">
-      <div className="bg-[#111111] border-2 border-[#D92323] w-full max-w-2xl overflow-hidden shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-apple-modal">
+      <div className="glass-panel w-full max-w-2xl overflow-hidden shadow-2xl relative border-white/20">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 bg-[#1A1A1A] border border-[#4A4C50] text-gray-400 hover:text-white"
+          className="absolute top-4 right-4 p-2 rounded-full bg-white/10 border border-white/15 text-slate-300 hover:text-white transition-all active:scale-95"
         >
           <X className="w-5 h-5" />
         </button>
@@ -82,87 +76,87 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
         {step === 1 && (
           <div className="p-6 sm:p-8 space-y-6">
             
-            <div className="flex items-center gap-3 border-b-2 border-[#4A4C50] pb-4">
-              <div className="w-10 h-10 bg-[#D92323] text-white flex items-center justify-center font-bold">
-                <Award className="w-6 h-6" />
+            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-r from-orange-500 to-rose-600 text-white flex items-center justify-center font-bold">
+                <Award className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-black text-white text-xl uppercase font-sans tracking-tight">Priority VIP Club Checkout</h3>
-                <p className="text-xs text-[#8B5A2B]">Tier: {tier.name} ({billingCycle.toUpperCase()})</p>
+                <h3 className="font-extrabold text-white text-xl tracking-tight">Priority VIP Club Checkout</h3>
+                <p className="text-xs text-orange-400 font-mono">Tier: {tier.name} ({billingCycle.toUpperCase()})</p>
               </div>
             </div>
 
             <form onSubmit={handleProceedToAuth} className="space-y-4">
-              <div className="space-y-2">
-                <div className="text-xs font-bold text-[#FF5E00] uppercase">// 1. RIDER DETAILS</div>
+              <div className="space-y-3">
+                <div className="text-xs font-semibold text-slate-400">1. RIDER INFORMATION</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="text"
-                    placeholder="FULL NAME *"
+                    placeholder="Full Name *"
                     required
                     value={riderDetails.fullName}
                     onChange={(e) => setRiderDetails({...riderDetails, fullName: e.target.value})}
-                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                   <input
                     type="tel"
-                    placeholder="PHONE NUMBER *"
+                    placeholder="Phone Number *"
                     required
                     value={riderDetails.phone}
                     onChange={(e) => setRiderDetails({...riderDetails, phone: e.target.value})}
-                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="email"
-                    placeholder="EMAIL ADDRESS"
+                    placeholder="Email Address"
                     value={riderDetails.email}
                     onChange={(e) => setRiderDetails({...riderDetails, email: e.target.value})}
-                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                   <input
                     type="text"
-                    placeholder="MOTORCYCLE MODEL *"
+                    placeholder="Motorcycle Model *"
                     required
                     value={riderDetails.bikeModel}
                     onChange={(e) => setRiderDetails({...riderDetails, bikeModel: e.target.value})}
-                    className="w-full bg-[#1A1A1A] border border-[#4A4C50] px-4 py-3 text-xs text-white focus:outline-none focus:border-[#FF5E00]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-500"
                   />
                 </div>
               </div>
 
               {/* Payment Method */}
               <div className="space-y-2 pt-2">
-                <div className="text-xs font-bold text-[#FF5E00] uppercase">// 2. PAYMENT METHOD</div>
+                <div className="text-xs font-semibold text-slate-400">2. PAYMENT METHOD</div>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('upi')}
-                    className={`p-3 border text-xs font-bold flex items-center justify-center gap-2 uppercase transition-all ${
-                      paymentMethod === 'upi' ? 'bg-[#D92323] text-white border-[#D92323]' : 'bg-[#1A1A1A] border-[#4A4C50] text-gray-400'
+                    className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all active:scale-95 ${
+                      paymentMethod === 'upi' ? 'bg-white/20 border-orange-500 text-white' : 'bg-white/[0.04] border-white/10 text-slate-400'
                     }`}
                   >
-                    <QrCode className="w-4 h-4" /> UPI / QR
+                    <QrCode className="w-4 h-4 text-orange-400" /> UPI / QR
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
-                    className={`p-3 border text-xs font-bold flex items-center justify-center gap-2 uppercase transition-all ${
-                      paymentMethod === 'card' ? 'bg-[#D92323] text-white border-[#D92323]' : 'bg-[#1A1A1A] border-[#4A4C50] text-gray-400'
+                    className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all active:scale-95 ${
+                      paymentMethod === 'card' ? 'bg-white/20 border-orange-500 text-white' : 'bg-white/[0.04] border-white/10 text-slate-400'
                     }`}
                   >
-                    <CreditCard className="w-4 h-4" /> Card
+                    <CreditCard className="w-4 h-4 text-orange-400" /> Card
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('netbanking')}
-                    className={`p-3 border text-xs font-bold flex items-center justify-center gap-2 uppercase transition-all ${
-                      paymentMethod === 'netbanking' ? 'bg-[#D92323] text-white border-[#D92323]' : 'bg-[#1A1A1A] border-[#4A4C50] text-gray-400'
+                    className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all active:scale-95 ${
+                      paymentMethod === 'netbanking' ? 'bg-white/20 border-orange-500 text-white' : 'bg-white/[0.04] border-white/10 text-slate-400'
                     }`}
                   >
-                    <Building2 className="w-4 h-4" /> NetBank
+                    <Building2 className="w-4 h-4 text-orange-400" /> NetBank
                   </button>
                 </div>
               </div>
@@ -171,33 +165,33 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="COUPON (TRY RATS2026)"
+                  placeholder="Coupon Code (RATS2026)"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
-                  className="flex-1 bg-[#1A1A1A] border border-[#4A4C50] px-4 py-2.5 text-xs text-white uppercase focus:outline-none focus:border-[#FF5E00]"
+                  className="flex-1 bg-white/10 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white uppercase placeholder-slate-400 focus:outline-none focus:border-orange-500"
                 />
                 <button
                   type="button"
                   onClick={handleApplyCoupon}
-                  className="btn-secondary px-4 py-2.5 text-xs"
+                  className="apple-btn-secondary px-4 py-2.5 text-xs"
                 >
-                  APPLY
+                  Apply
                 </button>
               </div>
 
               {/* Total & CTA */}
-              <div className="border-t border-[#4A4C50] pt-4 flex items-center justify-between">
+              <div className="border-t border-white/10 pt-4 flex items-center justify-between">
                 <div>
-                  <p className="text-[10px] text-gray-400">TOTAL PAYABLE:</p>
-                  <p className="text-xl font-black text-[#D92323]">
-                    ₹{finalPrice} {discountApplied && <span className="text-xs text-[#FF5E00]">(10% OFF)</span>}
+                  <p className="text-[10px] text-slate-400">TOTAL PAYABLE:</p>
+                  <p className="text-2xl font-extrabold text-white font-mono">
+                    ₹{finalPrice} {discountApplied && <span className="text-xs text-orange-400">(10% OFF)</span>}
                   </p>
                 </div>
                 <button
                   type="submit"
-                  className="btn-red px-6 py-3.5 text-xs flex items-center gap-2"
+                  className="apple-btn-primary px-7 py-3 text-xs font-semibold flex items-center gap-2 active:scale-95"
                 >
-                  <span>PAY NOW</span>
+                  <span>Pay Now</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -210,13 +204,13 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
         {/* STEP 2: SIMULATED OTP */}
         {step === 2 && (
           <div className="p-8 space-y-6 text-center">
-            <div className="w-16 h-16 bg-[#D92323] text-white flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 bg-white/10 border border-white/20 rounded-full text-orange-400 flex items-center justify-center mx-auto">
               <Lock className="w-8 h-8" />
             </div>
 
-            <div className="space-y-2 font-sans">
-              <h3 className="text-2xl font-black text-white uppercase">BANK AUTHORIZATION OTP</h3>
-              <p className="text-xs text-gray-400">
+            <div className="space-y-2">
+              <h3 className="text-2xl font-extrabold text-white">Bank Authorization OTP</h3>
+              <p className="text-xs text-slate-400">
                 A simulated verification code has been sent for <span className="text-white font-bold">₹{finalPrice}</span>.
               </p>
             </div>
@@ -228,23 +222,23 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
                 maxLength={4}
                 value={otpInput}
                 onChange={(e) => setOtpInput(e.target.value)}
-                className="w-full bg-[#1A1A1A] border-2 border-[#D92323] px-4 py-3 text-center text-xl font-bold tracking-widest text-white focus:outline-none"
+                className="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-center text-xl font-bold tracking-widest text-white focus:outline-none focus:border-orange-500 font-mono"
               />
             </div>
 
             <div className="flex gap-3 justify-center pt-4">
               <button
                 onClick={() => setStep(1)}
-                className="btn-secondary px-6 py-3 text-xs"
+                className="apple-btn-secondary px-6 py-3 text-xs font-medium"
               >
                 Back
               </button>
               <button
                 onClick={handleSimulatePayment}
                 disabled={isProcessing}
-                className="btn-red px-8 py-3 text-xs flex items-center gap-2"
+                className="apple-btn-primary px-8 py-3 text-xs font-semibold flex items-center gap-2"
               >
-                {isProcessing ? 'AUTHORIZING...' : 'AUTHORIZE & ISSUE VIP PASS'}
+                {isProcessing ? 'Authorizing...' : 'Authorize & Issue VIP Pass'}
               </button>
             </div>
           </div>
@@ -252,19 +246,19 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
 
         {/* STEP 3: METALLIC DIGITAL VIP PASS CARD WITH OFFICIAL R.A.T.S TIRE EMBLEM */}
         {step === 3 && (
-          <div className="p-8 space-y-6 animate-fade-in text-center">
+          <div className="p-8 space-y-6 text-center">
             
-            <div className="inline-block bg-[#FF5E00] text-black px-4 py-1 font-bold text-xs uppercase">
-              ✓ MEMBERSHIP ACTIVE & VERIFIED
+            <div className="inline-flex items-center gap-2 glass-pill px-4 py-1 text-xs text-emerald-400 font-medium">
+              <span>✓ Membership Active & Verified</span>
             </div>
 
             {/* DIGITAL VIP CARD MOCKUP WITH OFFICIAL EMBLEM */}
-            <div className="max-w-md mx-auto rounded-none p-6 bg-[#1A1A1A] border-2 border-[#D92323] border-l-8 text-left space-y-6 shadow-2xl relative">
+            <div className="max-w-md mx-auto rounded-3xl p-6 glass-panel border-orange-500/40 text-left space-y-6 shadow-2xl relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl">
               
               {/* Card Header with Official Emblem */}
-              <div className="flex justify-between items-start pb-4 border-b border-[#4A4C50]">
+              <div className="flex justify-between items-start pb-4 border-b border-white/15">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-white p-1 border-2 border-[#4A4C50] shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-white/10 p-0.5 border border-white/30 shrink-0 flex items-center justify-center backdrop-blur-md">
                     <img 
                       src="/rats-logo.png" 
                       alt="R.A.T.S Tire Emblem Logo" 
@@ -272,39 +266,39 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
                     />
                   </div>
                   <div>
-                    <h4 className="font-display text-xl text-white tracking-widest leading-none">R.A.T.S CLUBHOUSE</h4>
-                    <p className="text-[10px] text-[#FF5E00] uppercase font-bold">{tier.name}</p>
+                    <h4 className="font-bold text-lg text-white leading-none">R.A.T.S CLUBHOUSE</h4>
+                    <p className="text-[11px] text-orange-400 font-mono mt-1 font-semibold">{tier.name}</p>
                   </div>
                 </div>
-                <Award className="w-8 h-8 text-[#D92323]" />
+                <Award className="w-7 h-7 text-amber-400" />
               </div>
 
               {/* Card Details */}
-              <div className="space-y-4 text-xs">
+              <div className="space-y-4 text-xs font-mono">
                 <div>
-                  <p className="text-[9px] text-gray-400">MEMBER ID</p>
-                  <p className="font-bold text-lg text-[#D92323]">{generatedMemberId}</p>
+                  <p className="text-[9px] text-slate-400">MEMBER ID</p>
+                  <p className="font-extrabold text-lg text-orange-400">{generatedMemberId}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <p className="text-[9px] text-gray-400">CARD HOLDER:</p>
-                    <p className="font-bold text-white">{riderDetails.fullName || 'Registered Rider'}</p>
+                    <p className="text-[9px] text-slate-400">CARD HOLDER:</p>
+                    <p className="font-semibold text-white">{riderDetails.fullName || 'Registered Rider'}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-gray-400">VEHICLE:</p>
-                    <p className="font-bold text-white">{riderDetails.bikeModel || 'Squad Rider'}</p>
+                    <p className="text-[9px] text-slate-400">VEHICLE:</p>
+                    <p className="font-semibold text-white">{riderDetails.bikeModel || 'Squad Rider'}</p>
                   </div>
                 </div>
               </div>
 
               {/* QR Code */}
-              <div className="pt-3 border-t border-[#4A4C50] flex justify-between items-end">
+              <div className="pt-3 border-t border-white/15 flex justify-between items-end">
                 <div>
-                  <p className="text-[8px] text-gray-400">VALID THRU</p>
-                  <p className="text-xs font-bold text-[#FF5E00]">SEPTEMBER 2027</p>
+                  <p className="text-[9px] text-slate-400 font-mono">VALID THRU</p>
+                  <p className="text-xs font-bold text-emerald-400 font-mono">SEPTEMBER 2027</p>
                 </div>
-                <div className="w-12 h-12 bg-white p-1">
+                <div className="w-12 h-12 bg-white p-1 rounded-xl">
                   <QrCode className="w-full h-full text-black" />
                 </div>
               </div>
@@ -315,13 +309,13 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
             <div className="flex gap-3 max-w-md mx-auto pt-2">
               <button
                 onClick={() => window.print()}
-                className="btn-secondary flex-1 py-3 text-xs flex items-center justify-center gap-2"
+                className="apple-btn-secondary flex-1 py-3 text-xs font-medium flex items-center justify-center gap-2"
               >
-                <Printer className="w-4 h-4" /> Print VIP Card
+                <Printer className="w-4 h-4" /> Print VIP Pass
               </button>
               <button
                 onClick={onClose}
-                className="btn-red flex-1 py-3 text-xs"
+                className="apple-btn-primary flex-1 py-3 text-xs font-semibold"
               >
                 Return to Pit Stop
               </button>
@@ -334,3 +328,4 @@ export default function PaymentModal({ tier, billingCycle, onClose }) {
     </div>
   );
 }
+
